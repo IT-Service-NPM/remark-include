@@ -13,6 +13,21 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/IT-Service-NPM/remark-include/compare/v4.2.1...v5.0.0) (2026-02-24)
+
+
+### Code Refactoring
+
+* use remark-code-path-adjustment ([d2560c4](https://github.com/IT-Service-NPM/remark-include/commit/d2560c45fbfdb84b1a4936375612fd6e91a53ad2))
+
+
+### BREAKING CHANGES
+
+* extracted and used plugins
+@it-service-npm/remark-heading-adjustment,
+@it-service-npm/remark-relative-url-adjustment,
+@it-service-npm/remark-code-path-adjustment
+
 ## [4.2.1](https://github.com/IT-Service-NPM/remark-include/compare/v4.2.0...v4.2.1) (2026-02-20)
 
 
