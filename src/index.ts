@@ -28,6 +28,9 @@ import type { VFile } from 'vfile';
 import { VFileMessage } from 'vfile-message';
 import { read, readSync } from 'to-vfile';
 import { visit } from 'unist-util-visit';
+import {
+  remarkHeadingsAdjustment
+} from '@it-service-npm/remark-heading-adjustment';
 
 /* eslint-disable max-statements */
 
@@ -240,24 +243,18 @@ function fixIncludedCodePath(
  * @param includedAST AST for included markdown file
  * @param mainFile main ("includer") markdown file
  * @param includedFile included markdown file
- * @param depth heading level for current include directive
  *
  * @internal
  */
 function fixIncludedAST(
   includedAST: Root,
   mainFile: VFile,
-  includedFile: VFile,
-  depth: number
+  includedFile: VFile
 ): Root {
-  let depthDelta: number | undefined;
+  // let depthDelta: number | undefined;
   visit(includedAST,
     function (node: Nodes): void {
       switch (node.type) {
-        case 'heading': {
-          node.depth -= (depthDelta ??= node.depth - depth - 1);
-          break;
-        }
         case 'image':
         case 'link':
         case 'definition': {
@@ -333,14 +330,17 @@ export function remarkIncludeSync(
               _includedFilePath
             );
             const includedFile: VFile = readSync(includedFilePath, 'utf8');
-            const includedAST: Root = processor.runSync(
-              processor.parse(includedFile),
-              includedFile
-            ) as Root;
+
+            const includedAST: Root = processor()
+              .data('topHeadingDepth', includeDirective.depth + 1)
+              .runSync(
+                processor.parse(includedFile),
+                includedFile
+              ) as Root;
+
             fixIncludedAST(
               includedAST,
-              file, includedFile,
-              includeDirective.depth
+              file, includedFile
             );
             return includedAST.children;
           }
@@ -380,7 +380,8 @@ export function remarkIncludeSync(
 export const remarkIncludePresetSync: Preset = {
   plugins: [
     remarkDirective,
-    remarkIncludeSync
+    remarkIncludeSync,
+    remarkHeadingsAdjustment
   ]
 };
 
@@ -448,14 +449,17 @@ export function remarkInclude(
                 _includedFilePath
               );
               const includedFile: VFile = await read(includedFilePath, 'utf8');
-              const includedAST: Root = await processor.run(
-                processor.parse(includedFile),
-                includedFile
-              ) as Root;
+
+              const includedAST: Root = await processor()
+                .data('topHeadingDepth', includeDirective.depth + 1)
+                .run(
+                  processor.parse(includedFile),
+                  includedFile
+                ) as Root;
+
               fixIncludedAST(
                 includedAST,
-                file, includedFile,
-                includeDirective.depth
+                file, includedFile
               );
               return includedAST.children;
             }
@@ -496,6 +500,7 @@ export function remarkInclude(
 export const remarkIncludePreset: Preset = {
   plugins: [
     remarkDirective,
-    remarkInclude
+    remarkInclude,
+    remarkHeadingsAdjustment
   ]
 };

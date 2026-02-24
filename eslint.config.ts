@@ -52,7 +52,8 @@ export default defineConfig([
       'unicorn/no-typeof-undefined': 'off',
       'unicorn/no-this-assignment': 'off',
       '@typescript-eslint/no-this-alias': 'off',
-      'sonarjs/no-alphabetical-sort': 'off'
+      'sonarjs/no-alphabetical-sort': 'off',
+      'sonarjs/no-commented-code': 'off'
     },
     languageOptions: {
       ecmaVersion: 2022,

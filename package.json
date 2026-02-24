@@ -49,6 +49,7 @@
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
 	},
 	"dependencies": {
+		"@it-service-npm/remark-heading-adjustment": "^1.1.0",
 		"@stdlib/utils-convert-path": "^0.2.3",
 		"is-absolute-url": "^5.0.0",
 		"markdown-extensions": "^2.0.0",

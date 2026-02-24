@@ -16,7 +16,7 @@ describe('remark-include', () => {
     try {
       process.chdir(__dirname);
 
-      const outputFile = await remarkDirectiveUsingExampleSync(
+      const outputFile = remarkDirectiveUsingExampleSync(
         path.join(testSourceFilesPath, 'main.md')
       );
 
@@ -41,7 +41,9 @@ describe('remark-include', () => {
       );
 
       await expect(String(outputFile))
-        .toMatchFileSnapshot(path.join(testSnapshotsFilesPath, 'output.md'));
+        .toMatchFileSnapshot(
+          path.join(testSnapshotsFilesPath, 'output.md')
+        );
 
     } finally {
       process.chdir(_cwd);
