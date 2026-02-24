@@ -11,13 +11,12 @@
  */
 
 import path from 'node:path';
-import convertPath from '@stdlib/utils-convert-path';
 import { globSync } from 'node:fs';
 import { glob } from 'node:fs/promises';
 import type { Transformer, Preset, Processor } from 'unified';
 import type {
   Nodes, Root, Parent,
-  Code, RootContent
+  RootContent
 } from 'mdast';
 import type { LeafDirective } from 'mdast-util-directive';
 import remarkDirective from 'remark-directive';
@@ -31,6 +30,10 @@ import {
 import {
   remarkRelativeUrlsAdjustment
 } from '@it-service-npm/remark-relative-url-adjustment';
+import {
+  remarkRelativeCodePathsAdjustment
+} from '@it-service-npm/remark-code-path-adjustment';
+
 
 /* eslint-disable max-statements */
 
@@ -151,87 +154,6 @@ function errorFileNotFound(
 };
 
 /**
- * Translate included code path:
- *
- * - an included markdown file will "inherit" the heading levels
- *
- * @param node Code node
- * @param mainFile main ("includer") markdown file
- * @param includedFile included markdown file
- *
- * @internal
- */
-function fixIncludedCodePath(
-  node: Code,
-  mainFile: VFile,
-  includedFile: VFile
-): void {
-  const fileMeta: string | undefined = (node.meta ?? '')
-    // Allow escaping spaces
-    .split(/(?<!\\) /g)
-    .find((meta) => meta.startsWith('file='));
-  if (typeof fileMeta === 'undefined') {
-    return;
-  };
-  // eslint-disable-next-line max-len
-  const fileAttributeRegExp = /^file=(?<path>.+?)(?:(?:#(?:L(?<from>\d+)(?:-)?)?)(?:L(?<to>\d+))?)?$/;
-  const fileMetaStructure = fileAttributeRegExp.exec(fileMeta);
-  if (fileMetaStructure?.groups?.path) {
-    const filePath = fileMetaStructure.groups.path;
-    const normalizedFilePath = filePath
-      .replaceAll(String.raw`\ `, ' ');
-    if (!path.isAbsolute(normalizedFilePath)) {
-      const rebasedFilePath = convertPath(
-        path.relative(
-          mainFile.dirname!,
-          path.resolve(
-            path.dirname(includedFile.path),
-            normalizedFilePath
-          )
-        ),
-        'posix'
-      );
-      node.meta =
-        'file=' + rebasedFilePath.replaceAll(' ', String.raw`\ `) +
-        (fileMetaStructure.groups.from ?
-          '#L' + fileMetaStructure.groups.from
-          : '') +
-        (fileMetaStructure.groups.to ?
-          '-L' + fileMetaStructure.groups.to
-          : '');
-    };
-  };
-};
-
-/**
- * Included markdown AST postprocessing:
- *
- * - relative images and links in the included files
- *   will have their paths rewritten
- *   to be relative the original document rather than the imported file
- * - an included markdown file will "inherit" the heading levels
- *
- * @param includedAST AST for included markdown file
- * @param mainFile main ("includer") markdown file
- * @param includedFile included markdown file
- *
- * @internal
- */
-function fixIncludedAST(
-  includedAST: Root,
-  mainFile: VFile,
-  includedFile: VFile
-): Root {
-  visit(includedAST,
-    'code',
-    function (node: Code): void {
-      fixIncludedCodePath(node, mainFile, includedFile);
-    }
-  );
-  return includedAST;
-};
-
-/**
  * Sync Remark plugin fabric function.
  *
  * With this plugin, you can use `::include{file=./included.md}`
@@ -302,10 +224,6 @@ export function remarkIncludeSync(
                 includedFile
               ) as Root;
 
-            fixIncludedAST(
-              includedAST,
-              file, includedFile
-            );
             return includedAST.children;
           }
         );
@@ -346,7 +264,8 @@ export const remarkIncludePresetSync: Preset = {
     remarkDirective,
     remarkIncludeSync,
     remarkHeadingsAdjustment,
-    remarkRelativeUrlsAdjustment
+    remarkRelativeUrlsAdjustment,
+    remarkRelativeCodePathsAdjustment
   ]
 };
 
@@ -426,10 +345,6 @@ export function remarkInclude(
                   includedFile
                 ) as Root;
 
-              fixIncludedAST(
-                includedAST,
-                file, includedFile
-              );
               return includedAST.children;
             }
           )));
@@ -471,6 +386,7 @@ export const remarkIncludePreset: Preset = {
     remarkDirective,
     remarkInclude,
     remarkHeadingsAdjustment,
-    remarkRelativeUrlsAdjustment
+    remarkRelativeUrlsAdjustment,
+    remarkRelativeCodePathsAdjustment
   ]
 };

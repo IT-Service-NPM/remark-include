@@ -50,8 +50,8 @@
 	},
 	"dependencies": {
 		"@it-service-npm/remark-heading-adjustment": "^1.1.0",
-		"@it-service-npm/remark-relative-url-adjustment": "^1.0.0",
-		"@stdlib/utils-convert-path": "^0.2.3",
+		"@it-service-npm/remark-relative-url-adjustment": "^1.1.0",
+		"@it-service-npm/remark-code-path-adjustment": "^1.0.1",
 		"markdown-extensions": "^2.0.0",
 		"remark": "^15.0.1",
 		"remark-directive": "^4.0.0",

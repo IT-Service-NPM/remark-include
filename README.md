@@ -92,12 +92,14 @@ There are two plugins: `remarkInclude` (preferred) and `remarkIncludeSync`.
 >   - `remarkDirective`
 >   - `remarkHeadingsAdjustment`
 >   - `remarkRelativeUrlsAdjustment`
+>   - `remarkRelativeCodePathsAdjustment`
 > - `remarkIncludePresetSync`. This preset contains:
 >
 >   - `remarkIncludeSync`
 >   - `remarkDirective`
 >   - `remarkHeadingsAdjustment`
 >   - `remarkRelativeUrlsAdjustment`
+>   - `remarkRelativeCodePathsAdjustment`
 
 [`remark-directive`]: https://www.npmjs.com/package/remark-directive
 
