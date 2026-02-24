@@ -11,16 +11,13 @@
  */
 
 import path from 'node:path';
-import url from 'node:url';
-import RelateUrl from 'relateurl';
-import isAbsoluteUrl from 'is-absolute-url';
 import convertPath from '@stdlib/utils-convert-path';
 import { globSync } from 'node:fs';
 import { glob } from 'node:fs/promises';
 import type { Transformer, Preset, Processor } from 'unified';
 import type {
   Nodes, Root, Parent,
-  Resource, Code, RootContent
+  Code, RootContent
 } from 'mdast';
 import type { LeafDirective } from 'mdast-util-directive';
 import remarkDirective from 'remark-directive';
@@ -31,6 +28,9 @@ import { visit } from 'unist-util-visit';
 import {
   remarkHeadingsAdjustment
 } from '@it-service-npm/remark-heading-adjustment';
+import {
+  remarkRelativeUrlsAdjustment
+} from '@it-service-npm/remark-relative-url-adjustment';
 
 /* eslint-disable max-statements */
 
@@ -151,35 +151,6 @@ function errorFileNotFound(
 };
 
 /**
- * Translate included Resources ULR:
- *
- * - relative images and links in the included files
- *   will have their paths rewritten
- *   to be relative the original document rather than the imported file
- *
- * @param node image, link, definition or other Resource node
- * @param mainFile main ("includer") markdown file
- * @param includedFile included markdown file
- *
- * @internal
- */
-function fixIncludedResourcesURL(
-  node: Resource,
-  mainFile: VFile,
-  includedFile: VFile
-): void {
-  if (!(isAbsoluteUrl(node.url) || node.url.startsWith('/'))) {
-    node.url = RelateUrl.relate(
-      url.pathToFileURL(mainFile.path).href,
-      new URL(
-        node.url,
-        url.pathToFileURL(includedFile.path)
-      ).href
-    );
-  };
-};
-
-/**
  * Translate included code path:
  *
  * - an included markdown file will "inherit" the heading levels
@@ -251,21 +222,10 @@ function fixIncludedAST(
   mainFile: VFile,
   includedFile: VFile
 ): Root {
-  // let depthDelta: number | undefined;
   visit(includedAST,
-    function (node: Nodes): void {
-      switch (node.type) {
-        case 'image':
-        case 'link':
-        case 'definition': {
-          fixIncludedResourcesURL(node, mainFile, includedFile);
-          break;
-        }
-        case 'code': {
-          fixIncludedCodePath(node, mainFile, includedFile);
-          break;
-        }
-      };
+    'code',
+    function (node: Code): void {
+      fixIncludedCodePath(node, mainFile, includedFile);
     }
   );
   return includedAST;
@@ -333,6 +293,10 @@ export function remarkIncludeSync(
 
             const includedAST: Root = processor()
               .data('topHeadingDepth', includeDirective.depth + 1)
+              .data('filePathChanges', {
+                sourcePath: includedFile.path,
+                destinationPath: file.path
+              })
               .runSync(
                 processor.parse(includedFile),
                 includedFile
@@ -381,7 +345,8 @@ export const remarkIncludePresetSync: Preset = {
   plugins: [
     remarkDirective,
     remarkIncludeSync,
-    remarkHeadingsAdjustment
+    remarkHeadingsAdjustment,
+    remarkRelativeUrlsAdjustment
   ]
 };
 
@@ -452,6 +417,10 @@ export function remarkInclude(
 
               const includedAST: Root = await processor()
                 .data('topHeadingDepth', includeDirective.depth + 1)
+                .data('filePathChanges', {
+                  sourcePath: includedFile.path,
+                  destinationPath: file.path
+                })
                 .run(
                   processor.parse(includedFile),
                   includedFile
@@ -501,6 +470,7 @@ export const remarkIncludePreset: Preset = {
   plugins: [
     remarkDirective,
     remarkInclude,
-    remarkHeadingsAdjustment
+    remarkHeadingsAdjustment,
+    remarkRelativeUrlsAdjustment
   ]
 };
