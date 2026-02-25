@@ -9,6 +9,7 @@ import ESLintPluginPrettier from 'eslint-plugin-prettier';
 import ESLintPluginUnicorn from 'eslint-plugin-unicorn';
 import ESLintConfigPrettier from 'eslint-config-prettier';
 import ESLintPluginSonarJs from 'eslint-plugin-sonarjs';
+import * as ESLintPluginDepend from 'eslint-plugin-depend';
 
 export default defineConfig([
   {
@@ -19,12 +20,14 @@ export default defineConfig([
       ...ESLintPluginTypescript.configs.strictTypeChecked,
       ...ESLintPluginTypescript.configs.stylisticTypeChecked,
       ESLintPluginUnicorn.configs.recommended,
-      ESLintConfigPrettier
+      ESLintConfigPrettier,
+      ESLintPluginDepend.configs['flat/recommended']
     ],
     plugins: {
       'n': ESLintPluginN,
       'prettier': ESLintPluginPrettier,
-      'unicorn': ESLintPluginUnicorn
+      'unicorn': ESLintPluginUnicorn,
+      'depend': ESLintPluginDepend.default
     },
     rules: {
       'array-bracket-spacing': ['error', 'never'],

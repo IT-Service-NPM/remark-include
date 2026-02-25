@@ -49,9 +49,9 @@
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
 	},
 	"dependencies": {
+		"@it-service-npm/remark-code-path-adjustment": "^1.0.1",
 		"@it-service-npm/remark-heading-adjustment": "^1.1.0",
 		"@it-service-npm/remark-relative-url-adjustment": "^1.1.0",
-		"@it-service-npm/remark-code-path-adjustment": "^1.0.1",
 		"markdown-extensions": "^2.0.0",
 		"remark": "^15.0.1",
 		"remark-directive": "^4.0.0",
@@ -85,6 +85,7 @@
 		"conventional-changelog-cli": "^4.1.0",
 		"eslint": "^10.0.0",
 		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-depend": "^1.4.0",
 		"eslint-plugin-n": "^17.24.0",
 		"eslint-plugin-prettier": "^5.5.5",
 		"eslint-plugin-sonarjs": "^4.0.0",
