@@ -13,6 +13,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.1](https://github.com/IT-Service-NPM/remark-include/compare/v5.0.0...v5.0.1) (2026-02-28)
+
+
+### Bug Fixes
+
+* fix runtime dependency vfile-message ([6774032](https://github.com/IT-Service-NPM/remark-include/commit/6774032560c66515aa877188dc38befa360be3fc))
+
 # [5.0.0](https://github.com/IT-Service-NPM/remark-include/compare/v4.2.1...v5.0.0) (2026-02-24)
 
 
