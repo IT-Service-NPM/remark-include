@@ -1,27 +1,31 @@
+import { describe, it, type TestContext } from 'node:test';
 import path from 'node:path';
 import { remarkDirectiveUsingExample } from './example.ts';
 
-const testSourceFilesPath: string = path.join(__dirname, 'fixtures');
-const testSnapshotsFilesPath: string = path.join(__dirname, 'snapshots');
+await describe('remark-include', async () => {
 
-describe('remark-include', () => {
+  await it('must include single markdown file',
+    async (t: TestContext) => {
+      const _cwd = process.cwd();
+      try {
+        process.chdir(import.meta.dirname);
 
-  it('must include single markdown file', async () => {
-    const _cwd = process.cwd();
-    try {
-      process.chdir(__dirname);
+        const outputFile = await remarkDirectiveUsingExample(
+          path.resolve(
+            import.meta.dirname, 'fixtures',
+            'main.md'
+          )
+        );
 
-      const outputFile = await remarkDirectiveUsingExample(
-        path.join(testSourceFilesPath, 'main.md')
-      );
-
-      await expect(String(outputFile))
-        .toMatchFileSnapshot(path.join(testSnapshotsFilesPath, 'output.md'));
-
-    } finally {
-      process.chdir(_cwd);
-    };
-
-  });
+        t.assert.fileSnapshot(
+          String(outputFile.value),
+          path.resolve(import.meta.dirname, 'snapshots', 'output.md'),
+          { serializers: [(data: string) => data] }
+        );
+      } finally {
+        process.chdir(_cwd);
+      };
+    }
+  );
 
 });

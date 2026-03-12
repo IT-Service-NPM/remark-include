@@ -1,3 +1,4 @@
+import { describe, it, beforeEach, type TestContext } from 'node:test';
 import path from 'node:path';
 import { remark } from 'remark';
 import type { Processor } from 'unified';
@@ -8,10 +9,7 @@ import {
   remarkIncludePresetSync
 } from '@it-service-npm/remark-include';
 
-const testSourceFilesPath: string = path.join(__dirname, 'fixtures');
-const testSnapshotsFilesPath: string = path.join(__dirname, 'snapshots');
-
-describe('remarkIncludeSync', () => {
+await describe('remarkIncludeSync', async () => {
 
   let RemarkProcessor: Processor<Root, undefined, undefined, Root, string>;
 
@@ -22,94 +20,106 @@ describe('remarkIncludeSync', () => {
   });
 
   // eslint-disable-next-line max-len
-  it('send a INFO message to the remark processor if the file is not found and an optional attribute is present',
-    async () => {
+  await it('send a INFO message to the remark processor if the file is not found and an optional attribute is present',
+    async (t: TestContext) => {
 
       const testFile = await vFile.read(
-        path.join(testSourceFilesPath, 'main-with-optional-include.md')
+        path.resolve(
+          import.meta.dirname, 'fixtures',
+          'main-with-optional-include.md'
+        )
       );
-      const fileInfoSpy = vi.spyOn(testFile, 'info');
-      const fileFailSpy = vi.spyOn(testFile, 'fail');
+      const fileInfoSpy = t.mock.method(testFile, 'info');
+      const fileFailSpy = t.mock.method(testFile, 'fail');
 
-      await expect((async function () {
-        const outputFile = await RemarkProcessor
-          .process(testFile);
-        return outputFile.value;
-      })()).resolves
-        .toMatchFileSnapshot(path.join(testSnapshotsFilesPath, 'output.md'));
+      const outputFile = RemarkProcessor
+        .processSync(testFile);
 
-      expect(fileInfoSpy).toHaveBeenCalledTimes(1);
-      expect(fileFailSpy).toHaveBeenCalledTimes(0);
-
-    });
+      t.assert.fileSnapshot(
+        String(outputFile.value),
+        path.resolve(import.meta.dirname, 'snapshots', 'output.md'),
+        { serializers: [(data: string) => data] }
+      );
+      t.assert.strictEqual(fileInfoSpy.mock.callCount(), 1);
+      t.assert.strictEqual(fileFailSpy.mock.callCount(), 0);
+    }
+  );
 
   // eslint-disable-next-line max-len
-  it('send a FAIL message to the remark processor if the file is not found and an optional attribute is not present',
-    async () => {
+  await it('send a FAIL message to the remark processor if the file is not found and an optional attribute is not present',
+    async (t: TestContext) => {
 
       const testFile = await vFile.read(
-        path.join(testSourceFilesPath, 'main-with-expected-include.md')
+        path.resolve(
+          import.meta.dirname, 'fixtures',
+          'main-with-expected-include.md'
+        )
       );
-      const fileInfoSpy = vi.spyOn(testFile, 'info');
-      const fileFailSpy = vi.spyOn(testFile, 'fail');
+      const fileInfoSpy = t.mock.method(testFile, 'info');
+      const fileFailSpy = t.mock.method(testFile, 'fail');
 
-      await expect(
-        RemarkProcessor
-          .process(testFile)
-      ).rejects.toThrowError();
+      t.assert.throws(() => {
+        return RemarkProcessor
+          .processSync(testFile);
+      });
 
-      expect(fileInfoSpy).toHaveBeenCalledTimes(0);
-      expect(fileFailSpy).toHaveBeenCalledTimes(1);
-
-    });
-
-  // eslint-disable-next-line max-len
-  it('send a INFO message to the remark processor if the file is not found with glob and an optional attribute is present',
-    async () => {
-
-      const testFile = await vFile.read(path.join(
-        testSourceFilesPath,
-        'main-with-optional-include-with-glob.md'
-      ));
-      const fileInfoSpy = vi.spyOn(testFile, 'info');
-      const fileFailSpy = vi.spyOn(testFile, 'fail');
-
-      await expect((async function () {
-        const outputFile = await RemarkProcessor
-          .process(testFile);
-        return outputFile.value;
-      })()).resolves
-        .toMatchFileSnapshot(path.join(testSnapshotsFilesPath, 'output.md'));
-
-      expect(fileInfoSpy).toHaveBeenCalledTimes(1);
-      expect(fileFailSpy).toHaveBeenCalledTimes(0);
-
-    });
+      t.assert.strictEqual(fileInfoSpy.mock.callCount(), 0);
+      t.assert.strictEqual(fileFailSpy.mock.callCount(), 1);
+    }
+  );
 
   // eslint-disable-next-line max-len
-  it('send a FAIL message to the remark processor if the file is not found with glob and an optional attribute is not present',
-    async () => {
+  await it('send a INFO message to the remark processor if the file is not found with glob and an optional attribute is present',
+    async (t: TestContext) => {
 
-      const testFile = await vFile.read(path.join(
-        testSourceFilesPath,
-        'main-with-expected-include-with-glob.md'
-      ));
-      const fileInfoSpy = vi.spyOn(testFile, 'info');
-      const fileFailSpy = vi.spyOn(testFile, 'fail');
+      const testFile = await vFile.read(
+        path.resolve(
+          import.meta.dirname, 'fixtures',
+          'main-with-optional-include-with-glob.md'
+        )
+      );
+      const fileInfoSpy = t.mock.method(testFile, 'info');
+      const fileFailSpy = t.mock.method(testFile, 'fail');
 
-      await expect(
-        RemarkProcessor
-          .process(testFile)
-      ).rejects.toThrowError();
+      const outputFile = RemarkProcessor
+        .processSync(testFile);
 
-      expect(fileInfoSpy).toHaveBeenCalledTimes(0);
-      expect(fileFailSpy).toHaveBeenCalledTimes(1);
+      t.assert.fileSnapshot(
+        String(outputFile.value),
+        path.resolve(import.meta.dirname, 'snapshots', 'output.md'),
+        { serializers: [(data: string) => data] }
+      );
+      t.assert.strictEqual(fileInfoSpy.mock.callCount(), 1);
+      t.assert.strictEqual(fileFailSpy.mock.callCount(), 0);
+    }
+  );
 
-    });
+  // eslint-disable-next-line max-len
+  await it('send a FAIL message to the remark processor if the file is not found with glob and an optional attribute is not present',
+    async (t: TestContext) => {
+
+      const testFile = await vFile.read(
+        path.resolve(
+          import.meta.dirname, 'fixtures',
+          'main-with-expected-include-with-glob.md'
+        )
+      );
+      const fileInfoSpy = t.mock.method(testFile, 'info');
+      const fileFailSpy = t.mock.method(testFile, 'fail');
+
+      t.assert.throws(() => {
+        return RemarkProcessor
+          .processSync(testFile);
+      });
+
+      t.assert.strictEqual(fileInfoSpy.mock.callCount(), 0);
+      t.assert.strictEqual(fileFailSpy.mock.callCount(), 1);
+    }
+  );
 
 });
 
-describe('remarkInclude', () => {
+await describe('remarkInclude', async () => {
 
   let RemarkProcessor: Processor<Root, undefined, undefined, Root, string>;
 
@@ -120,89 +130,101 @@ describe('remarkInclude', () => {
   });
 
   // eslint-disable-next-line max-len
-  it('send a INFO message to the remark processor if the file is not found and an optional attribute is present',
-    async () => {
+  await it('send a INFO message to the remark processor if the file is not found and an optional attribute is present',
+    async (t: TestContext) => {
 
       const testFile = await vFile.read(
-        path.join(testSourceFilesPath, 'main-with-optional-include.md')
+        path.resolve(
+          import.meta.dirname, 'fixtures',
+          'main-with-optional-include.md'
+        )
       );
-      const fileInfoSpy = vi.spyOn(testFile, 'info');
-      const fileFailSpy = vi.spyOn(testFile, 'fail');
+      const fileInfoSpy = t.mock.method(testFile, 'info');
+      const fileFailSpy = t.mock.method(testFile, 'fail');
 
-      await expect((async function () {
-        const outputFile = await RemarkProcessor
-          .process(testFile);
-        return outputFile.value;
-      })()).resolves
-        .toMatchFileSnapshot(path.join(testSnapshotsFilesPath, 'output.md'));
+      const outputFile = await RemarkProcessor
+        .process(testFile);
 
-      expect(fileInfoSpy).toHaveBeenCalledTimes(1);
-      expect(fileFailSpy).toHaveBeenCalledTimes(0);
-
-    });
+      t.assert.fileSnapshot(
+        String(outputFile.value),
+        path.resolve(import.meta.dirname, 'snapshots', 'output.md'),
+        { serializers: [(data: string) => data] }
+      );
+      t.assert.strictEqual(fileInfoSpy.mock.callCount(), 1);
+      t.assert.strictEqual(fileFailSpy.mock.callCount(), 0);
+    }
+  );
 
   // eslint-disable-next-line max-len
-  it('send a FAIL message to the remark processor if the file is not found and an optional attribute is not present',
-    async () => {
+  await it('send a FAIL message to the remark processor if the file is not found and an optional attribute is not present',
+    async (t: TestContext) => {
 
       const testFile = await vFile.read(
-        path.join(testSourceFilesPath, 'main-with-expected-include.md')
+        path.resolve(
+          import.meta.dirname, 'fixtures',
+          'main-with-expected-include.md'
+        )
       );
-      const fileInfoSpy = vi.spyOn(testFile, 'info');
-      const fileFailSpy = vi.spyOn(testFile, 'fail');
+      const fileInfoSpy = t.mock.method(testFile, 'info');
+      const fileFailSpy = t.mock.method(testFile, 'fail');
 
-      await expect(
+      await t.assert.rejects(
         RemarkProcessor
           .process(testFile)
-      ).rejects.toThrowError();
+      );
 
-      expect(fileInfoSpy).toHaveBeenCalledTimes(0);
-      expect(fileFailSpy).toHaveBeenCalledTimes(1);
-
-    });
-
-  // eslint-disable-next-line max-len
-  it('send a INFO message to the remark processor if the file is not found with glob and an optional attribute is present',
-    async () => {
-
-      const testFile = await vFile.read(path.join(
-        testSourceFilesPath,
-        'main-with-optional-include-with-glob.md'
-      ));
-      const fileInfoSpy = vi.spyOn(testFile, 'info');
-      const fileFailSpy = vi.spyOn(testFile, 'fail');
-
-      await expect((async function () {
-        const outputFile = await RemarkProcessor
-          .process(testFile);
-        return outputFile.value;
-      })()).resolves
-        .toMatchFileSnapshot(path.join(testSnapshotsFilesPath, 'output.md'));
-
-      expect(fileInfoSpy).toHaveBeenCalledTimes(1);
-      expect(fileFailSpy).toHaveBeenCalledTimes(0);
-
-    });
+      t.assert.strictEqual(fileInfoSpy.mock.callCount(), 0);
+      t.assert.strictEqual(fileFailSpy.mock.callCount(), 1);
+    }
+  );
 
   // eslint-disable-next-line max-len
-  it('send a FAIL message to the remark processor if the file is not found with glob and an optional attribute is not present',
-    async () => {
+  await it('send a INFO message to the remark processor if the file is not found with glob and an optional attribute is present',
+    async (t: TestContext) => {
 
-      const testFile = await vFile.read(path.join(
-        testSourceFilesPath,
-        'main-with-expected-include-with-glob.md'
-      ));
-      const fileInfoSpy = vi.spyOn(testFile, 'info');
-      const fileFailSpy = vi.spyOn(testFile, 'fail');
+      const testFile = await vFile.read(
+        path.resolve(
+          import.meta.dirname, 'fixtures',
+          'main-with-optional-include-with-glob.md'
+        )
+      );
+      const fileInfoSpy = t.mock.method(testFile, 'info');
+      const fileFailSpy = t.mock.method(testFile, 'fail');
 
-      await expect(
+      const outputFile = await RemarkProcessor
+        .process(testFile);
+
+      t.assert.fileSnapshot(
+        String(outputFile.value),
+        path.resolve(import.meta.dirname, 'snapshots', 'output.md'),
+        { serializers: [(data: string) => data] }
+      );
+      t.assert.strictEqual(fileInfoSpy.mock.callCount(), 1);
+      t.assert.strictEqual(fileFailSpy.mock.callCount(), 0);
+    }
+  );
+
+  // eslint-disable-next-line max-len
+  await it('send a FAIL message to the remark processor if the file is not found with glob and an optional attribute is not present',
+    async (t: TestContext) => {
+
+      const testFile = await vFile.read(
+        path.resolve(
+          import.meta.dirname, 'fixtures',
+          'main-with-expected-include-with-glob.md'
+        )
+      );
+      const fileInfoSpy = t.mock.method(testFile, 'info');
+      const fileFailSpy = t.mock.method(testFile, 'fail');
+
+      await t.assert.rejects(
         RemarkProcessor
           .process(testFile)
-      ).rejects.toThrowError();
+      );
 
-      expect(fileInfoSpy).toHaveBeenCalledTimes(0);
-      expect(fileFailSpy).toHaveBeenCalledTimes(1);
-
-    });
+      t.assert.strictEqual(fileInfoSpy.mock.callCount(), 0);
+      t.assert.strictEqual(fileFailSpy.mock.callCount(), 1);
+    }
+  );
 
 });

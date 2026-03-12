@@ -1,11 +1,24 @@
 ---
-name: Continuous integration
+name: Check pull request
 
 on:
 
-  push:
+  pull_request:
     branches:
       - main
+    paths:
+      - src/**
+      - package.json
+      - pnpm-lock.yaml
+      - tsconfig.json
+      - test/**
+      - eslint.config.mjs
+      - api-extractor.json
+      - .readme.md
+      - .github/workflows/ci.yml
+  push:
+    branches:
+      - dependabot/**
     paths:
       - src/**
       - package.json
@@ -61,7 +74,7 @@ jobs:
     uses: IT-Service-NPM/.github/.github/workflows/test-only-package.yml@main
     secrets: inherit
 
-  test-result-publish:
+  check-result-publish:
     needs:
       - test
     permissions:
@@ -69,24 +82,5 @@ jobs:
       pull-requests: write
       contents: read
       issues: read
-    uses: IT-Service-NPM/.github/.github/workflows/publish-package-test-result.yml@main
+    uses: IT-Service-NPM/.github/.github/workflows/publish-package-changes-check.yml@main
     secrets: inherit
-
-  npmJS:
-    needs:
-      - build
-      - test
-    environment: npm
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      deployments: write
-      contents: write
-      issues: write
-      pull-requests: write
-      id-token: write
-    steps:
-
-      - uses: IT-Service-NPM/.github/.github/actions/publish-package@main
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

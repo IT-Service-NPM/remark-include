@@ -38,16 +38,18 @@
 	],
 	"scripts": {
 		"build": "tsc --build --clean && tsc --build",
-		"CI": "npm run build && npm run lint && npm run test && npm run update-readme-API && npm run update-readme",
+		"CI": "pnpm run build && pnpm run lint && pnpm run test && pnpm run build:readme:API && pnpm run build:readme",
 		"check-exports": "attw --pack .",
 		"lint": "tsc && eslint",
-		"test": "vitest run --coverage",
-		"update-readme-API": "npx api-extractor run --local && npx api-documenter markdown -i ./temp -o ./docs",
-		"update-examples-readme": "remark test/examples/*/readme.md --output",
-		"update-main-readme": "remark .readme.md --output README.md",
-		"update-readme": "npm run update-examples-readme && npm run update-main-readme",
-		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+		"test": "node --import tsx --experimental-transform-types --experimental-test-module-mocks --experimental-test-coverage --test-reporter=spec --test-reporter=junit --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=test/results/junit-report.xml --test-reporter-destination=coverage/lcov.info --test",
+		"test:snapshots": "node --import tsx --experimental-transform-types --experimental-test-module-mocks --test-update-snapshots --test",
+		"build:readme:API": "npx api-extractor run --local && npx api-documenter markdown -i temp -o docs",
+		"build:readme:examples": "remark test/examples/*/readme.md --output",
+		"build:readme:main": "remark .readme.md --output README.md",
+		"build:readme": "pnpm run build:readme:examples && pnpm run build:readme:main",
+		"build:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
 	},
+	"packageManager": "pnpm@10.30.3",
 	"dependencies": {
 		"@it-service-npm/remark-code-path-adjustment": "^1.0.1",
 		"@it-service-npm/remark-heading-adjustment": "^1.1.0",
@@ -58,7 +60,6 @@
 		"vfile-message": "^4.0.3"
 	},
 	"devDependencies": {
-		"@altano/vitest-plugins": "^1.1.1",
 		"@commitlint/cli": "^20.3.0",
 		"@commitlint/config-angular": "^20.3.0",
 		"@commitlint/config-conventional": "^20.3.0",
@@ -79,8 +80,6 @@
 		"@types/relateurl": "^0.2.33",
 		"@typescript-eslint/eslint-plugin": "^8.56.0",
 		"@typescript-eslint/parser": "^8.56.0",
-		"@vitest/coverage-istanbul": "^4.0.16",
-		"@vitest/eslint-plugin": "^1.6.8",
 		"conventional-changelog-cli": "^4.1.0",
 		"eslint": "^10.0.0",
 		"eslint-config-prettier": "^10.1.8",
@@ -105,11 +104,10 @@
 		"remark-validate-links": "^13.0.2",
 		"semantic-release": "^25.0.2",
 		"tsdoc-markdown": "^1.0.0",
+		"tsx": "^4.21.0",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.56.0",
 		"unified": "^11.0.5",
-		"vfile": "^6.0.3",
-		"vite-plugin-vitest-typescript-assert": "^1.1.4",
-		"vitest": "^4.0.18"
+		"vfile": "^6.0.3"
 	}
 }

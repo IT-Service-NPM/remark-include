@@ -1,50 +1,58 @@
+import { describe, it, type TestContext } from 'node:test';
 import path from 'node:path';
 import { remarkDirectiveUsingExample } from './example.ts';
 
-const testSourceFilesPath: string = path.join(__dirname, 'fixtures');
+await describe('remark-include', async () => {
 
-describe('remark-include', () => {
-
-  it('update relative url for images',
-    async () => {
+  await it('update relative url for images',
+    async (t: TestContext) => {
       const _cwd = process.cwd();
       try {
-        process.chdir(__dirname);
+        process.chdir(import.meta.dirname);
 
         const outputFile = await remarkDirectiveUsingExample(
-          path.join(testSourceFilesPath, 'main.md')
+          path.resolve(
+            import.meta.dirname, 'fixtures',
+            'main.md'
+          )
         );
 
-        await expect(String(outputFile))
-          .toMatchFileSnapshot(path.join(testSourceFilesPath, 'output.md'));
-
+        t.assert.fileSnapshot(
+          String(outputFile.value),
+          path.resolve(import.meta.dirname, 'fixtures', 'output.md'),
+          { serializers: [(data: string) => data] }
+        );
       } finally {
         process.chdir(_cwd);
       };
-
     }
   );
 
-  it('leave links (url) starting with `/` (relative to the repository root)',
-    async () => {
+  // eslint-disable-next-line max-len
+  await it('leave links (url) starting with `/` (relative to the repository root)',
+    async (t: TestContext) => {
       const _cwd = process.cwd();
       try {
-        process.chdir(__dirname);
+        process.chdir(import.meta.dirname);
 
         const outputFile = await remarkDirectiveUsingExample(
-          path.join(testSourceFilesPath, 'main-with-relative-to-root-link.md')
+          path.resolve(
+            import.meta.dirname, 'fixtures',
+            'main-with-relative-to-root-link.md'
+          )
         );
 
-        await expect(String(outputFile))
-          .toMatchFileSnapshot(path.join(
-            testSourceFilesPath,
+        t.assert.fileSnapshot(
+          String(outputFile.value),
+          path.resolve(
+            import.meta.dirname, 'fixtures',
             'output-with-relative-to-root-link.md'
-          ));
-
+          ),
+          { serializers: [(data: string) => data] }
+        );
       } finally {
         process.chdir(_cwd);
       };
-
     }
   );
 

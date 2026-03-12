@@ -1,28 +1,30 @@
+import { describe, it, type TestContext } from 'node:test';
 import path from 'node:path';
 import { remarkDirectiveUsingExample } from './example.ts';
 
-const testSourceFilesPath: string = path.join(__dirname, 'fixtures');
-const testSnapshotsFilesPath: string = path.join(__dirname, 'snapshots');
+await describe('remark-include', async () => {
 
-describe('remark-include', () => {
-
-  it('adjust the heading levels within the included content',
-    async () => {
+  await it('adjust the heading levels within the included content',
+    async (t: TestContext) => {
       const _cwd = process.cwd();
       try {
-        process.chdir(__dirname);
+        process.chdir(import.meta.dirname);
 
         const outputFile = await remarkDirectiveUsingExample(
-          path.join(testSourceFilesPath, 'main.md')
+          path.resolve(
+            import.meta.dirname, 'fixtures',
+            'main.md'
+          )
         );
 
-        await expect(String(outputFile))
-          .toMatchFileSnapshot(path.join(testSnapshotsFilesPath, 'output.md'));
-
+        t.assert.fileSnapshot(
+          String(outputFile.value),
+          path.resolve(import.meta.dirname, 'snapshots', 'output.md'),
+          { serializers: [(data: string) => data] }
+        );
       } finally {
         process.chdir(_cwd);
       };
-
     }
   );
 

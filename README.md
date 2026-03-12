@@ -44,7 +44,7 @@
 
 [build-url]: https://github.com/IT-Service-NPM/remark-include/actions/workflows/ci.yml
 
-[tests]: https://img.shields.io/endpoint?logo=vitest&url=https%3A%2F%2Fgist.githubusercontent.com%2Fsergey-s-betke%2Fd70e4de09a490afc9fb7a737363b231a%2Fraw%2Fremark-include-junit-tests.json
+[tests]: https://img.shields.io/endpoint?logo=node.js&url=https%3A%2F%2Fgist.githubusercontent.com%2Fsergey-s-betke%2Fd70e4de09a490afc9fb7a737363b231a%2Fraw%2Fremark-include-junit-tests.json
 
 [tests-url]: https://github.com/IT-Service-NPM/remark-include/actions/workflows/ci.yml
 

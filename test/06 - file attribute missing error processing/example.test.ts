@@ -1,40 +1,44 @@
+import { describe, it, type TestContext } from 'node:test';
 import path from 'node:path';
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
 import { remarkIncludePresetSync } from '@it-service-npm/remark-include';
 
-const testSourceFilesPath: string = path.join(__dirname, 'fixtures');
-
-describe('remark-include', () => {
+await describe('remark-include', async () => {
 
   // eslint-disable-next-line max-len
-  it('send a FAIL message to the remark processor if the file attribute is missing',
-    async () => {
+  await it('send a FAIL message to the remark processor if the file attribute is missing',
+    async (t: TestContext) => {
+
+      const testFile = await vFile.read(
+        path.resolve(
+          import.meta.dirname, 'fixtures',
+          'main-without-file-attribute.md'
+        )
+      );
+      const fileInfoSpy = t.mock.method(testFile, 'info');
+      const fileFailSpy = t.mock.method(testFile, 'fail');
 
       const RemarkProcessor = remark()
         .use(remarkIncludePresetSync)
         .freeze();
-      const testFile = await vFile.read(
-        path.join(testSourceFilesPath, 'main-without-file-attribute.md')
-      );
-      const fileInfoSpy = vi.spyOn(testFile, 'info');
-      const fileFailSpy = vi.spyOn(testFile, 'fail');
 
       const _cwd = process.cwd();
       try {
-        process.chdir(__dirname);
+        process.chdir(import.meta.dirname);
 
-        await expect(
+        await t.assert.rejects(
           RemarkProcessor
             .process(testFile)
-        ).rejects.toThrowError();
+        );
 
       } finally {
         process.chdir(_cwd);
       };
-      expect(fileInfoSpy).toHaveBeenCalledTimes(0);
-      expect(fileFailSpy).toHaveBeenCalledTimes(1);
 
-    });
+      t.assert.strictEqual(fileInfoSpy.mock.callCount(), 0);
+      t.assert.strictEqual(fileFailSpy.mock.callCount(), 1);
+    }
+  );
 
 });

@@ -1,3 +1,4 @@
+---
 name: Lint source code, documentation
 
 on:
@@ -26,7 +27,7 @@ jobs:
       issues: write
       pull-requests: write
       statuses: write
-    uses: IT-Service-NPM/.github/.github/workflows/lint.yml@main
+    uses: IT-Service-NPM/.github/.github/workflows/lint-package.yml@main
     with:
       log-level: ${{ inputs.log-level }}
     secrets: inherit

@@ -17,12 +17,12 @@
 		"streetsidesoftware.code-spell-checker-russian",
 		"usernamehw.errorlens",
 		"dbaeumer.vscode-eslint",
-		"vitest.explorer",
 		"joshbolduc.commitlint",
 		"ryanluker.vscode-coverage-gutters",
 		"adam-bender.commit-message-editor",
 		"bierner.jsdoc-markdown-highlighting",
-		"vicius.tsdoc-gen"
+		"vicius.tsdoc-gen",
+		"connor4312.nodejs-testing"
 	],
 	"unwantedRecommendations": [
 		"serhioromano.vscode-gitflow"

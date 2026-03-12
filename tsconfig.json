@@ -10,7 +10,6 @@
 		}
 	],
 	"compilerOptions": {
-		"tsBuildInfoFile": "./temp/tsconfig.tsbuildinfo",
 		"noEmit": true,
 		"allowImportingTsExtensions": true,
 		"esModuleInterop": true,
@@ -34,16 +33,6 @@
 		"noEmitOnError": true,
 		"sourceMap": true,
 		"declaration": true,
-		"declarationMap": true,
-		"paths": {
-			"@it-service-npm/remark-include": [
-				"./dist"
-			],
-		},
-		"types": [
-			"node",
-			"vitest/globals",
-			"@altano/vitest-plugins/matchers"
-		],
+		"declarationMap": true
 	}
 }
