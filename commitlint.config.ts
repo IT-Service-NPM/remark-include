@@ -21,8 +21,8 @@ const Configuration: UserConfig = {
   },
   defaultIgnores: true,
   ignores: [
-    (commit) => commit.startsWith('build(deps): bump'),
-    (commit) => commit.startsWith('ci(deps): bump')
+    (commit: string) => commit.startsWith('build(deps): bump'),
+    (commit: string) => commit.startsWith('ci(deps): bump')
   ],
 };
 
