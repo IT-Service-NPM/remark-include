@@ -18,14 +18,16 @@ All notable changes to this project will be documented in this file. See
 
 ### Bug Fixes
 
-* fix runtime dependency vfile-message ([6774032](https://github.com/IT-Service-NPM/remark-include/commit/6774032560c66515aa877188dc38befa360be3fc))
+* fix runtime dependency vfile-message
+  ([6774032](https://github.com/IT-Service-NPM/remark-include/commit/6774032560c66515aa877188dc38befa360be3fc))
 
 # [5.0.0](https://github.com/IT-Service-NPM/remark-include/compare/v4.2.1...v5.0.0) (2026-02-24)
 
 
 ### Code Refactoring
 
-* use remark-code-path-adjustment ([d2560c4](https://github.com/IT-Service-NPM/remark-include/commit/d2560c45fbfdb84b1a4936375612fd6e91a53ad2))
+* use remark-code-path-adjustment
+  ([d2560c4](https://github.com/IT-Service-NPM/remark-include/commit/d2560c45fbfdb84b1a4936375612fd6e91a53ad2))
 
 
 ### BREAKING CHANGES
@@ -40,7 +42,8 @@ All notable changes to this project will be documented in this file. See
 
 ### Bug Fixes
 
-* bump node min version to 22.17 ([5826d7d](https://github.com/IT-Service-NPM/remark-include/commit/5826d7df0725e7de12cd6cb147e7fb6ec3b67d81))
+* bump node min version to 22.17
+  ([5826d7d](https://github.com/IT-Service-NPM/remark-include/commit/5826d7df0725e7de12cd6cb147e7fb6ec3b67d81))
 
 # [4.2.0](https://github.com/IT-Service-NPM/remark-include/compare/v4.1.0...v4.2.0) (2026-02-18)
 
