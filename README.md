@@ -105,18 +105,16 @@ There are two plugins: `remarkInclude` (preferred) and `remarkIncludeSync`.
 
 ## Contents
 
-- [@it-service-npm/remark-include Remark plugin](#it-service-npmremark-include-remark-plugin)
-  - [Contents](#contents)
-  - [Install](#install)
-  - [Examples](#examples)
-    - [Transclusion or including markdown sub-documents for reuse](#transclusion-or-including-markdown-sub-documents-forreuse)
-    - [Recursive transclusion](#recursive-transclusion)
-    - [Adjust the heading levels](#adjust-the-headinglevels)
-    - [Include multiple files with glob](#include-multiple-files-withglob)
-    - [Updating relative path for links, images](#updating-relative-path-for-linksimages)
-    - [Updating relative path for code files](#updating-relative-path-for-codefiles)
-  - [API](#api)
-  - [License](#license)
+- [Install](#install)
+- [Examples](#examples)
+  - [Transclusion or including markdown sub-documents for reuse](#transclusion-or-including-markdown-sub-documents-forreuse)
+  - [Recursive transclusion](#recursive-transclusion)
+  - [Adjust the heading levels](#adjust-the-headinglevels)
+  - [Include multiple files with glob](#include-multiple-files-withglob)
+  - [Updating relative path for links, images](#updating-relative-path-for-linksimages)
+  - [Updating relative path for code files](#updating-relative-path-for-codefiles)
+- [API](#api)
+- [License](#license)
 
 ## Install
 
@@ -153,16 +151,30 @@ main.md:
 ```markdown file=test/examples/01/fixtures/main.md
 Hello. I am an main markdown file with `::include` directive.
 
-::include{file=./included.md}
+::include{file=./included1.md}
+
+After first file.
+
+::include{file=./included2.md}
+
+After second file.
 
 _That_ should do it!
 
 ```
 
-included.md:
+included1.md:
 
-```markdown file=test/examples/01/fixtures/included.md
-Hello. I am the included.
+```markdown file=test/examples/01/fixtures/included1.md
+Hello. I am the included1 file.
+
+```
+
+included2.md:
+
+```markdown file=test/examples/01/fixtures/included2.md
+Hello. I am the included2 file.
+
 ```
 
 Remark output:
@@ -170,7 +182,13 @@ Remark output:
 ```markdown file=test/examples/01/snapshots/output.md
 Hello. I am an main markdown file with `::include` directive.
 
-Hello. I am the included.
+Hello. I am the included1 file.
+
+After first file.
+
+Hello. I am the included2 file.
+
+After second file.
 
 *That* should do it!
 
