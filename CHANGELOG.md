@@ -15,34 +15,13 @@ All notable changes to this project will be documented in this file. See
 
 # [6.0.0](https://github.com/IT-Service-NPM/remark-include/compare/v5.0.1...v6.0.0) (2026-04-04)
 
-
-### Features
-
-* add /sync and /async exports for package ([c4172ca](https://github.com/IT-Service-NPM/remark-include/commit/c4172ca13433b03ae78d569978926e0d0b4cbccb))
-
-
 ### BREAKING CHANGES
 
 * add /sync and /async exports for package
-with `RemarkInclude` and `RemarkIncludePreset` names.
-
-<!-- markdownlint-configure-file
-{
-  "default": true,
-  "line-length": false,
-  "no-duplicate-heading": false,
-  "no-multiple-blanks": false,
-  "heading-increment": false,
-  "single-title": false
-}
--->
-# 📓 Changelog
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+  with `RemarkInclude` and `RemarkIncludePreset` names
+  ([c4172ca](https://github.com/IT-Service-NPM/remark-include/commit/c4172ca13433b03ae78d569978926e0d0b4cbccb))
 
 ## [5.0.1](https://github.com/IT-Service-NPM/remark-include/compare/v5.0.0...v5.0.1) (2026-02-28)
-
 
 ### Bug Fixes
 
@@ -50,13 +29,6 @@ All notable changes to this project will be documented in this file. See
   ([6774032](https://github.com/IT-Service-NPM/remark-include/commit/6774032560c66515aa877188dc38befa360be3fc))
 
 # [5.0.0](https://github.com/IT-Service-NPM/remark-include/compare/v4.2.1...v5.0.0) (2026-02-24)
-
-
-### Code Refactoring
-
-* use remark-code-path-adjustment
-  ([d2560c4](https://github.com/IT-Service-NPM/remark-include/commit/d2560c45fbfdb84b1a4936375612fd6e91a53ad2))
-
 
 ### BREAKING CHANGES
 
@@ -66,7 +38,6 @@ All notable changes to this project will be documented in this file. See
 @it-service-npm/remark-code-path-adjustment
 
 ## [4.2.1](https://github.com/IT-Service-NPM/remark-include/compare/v4.2.0...v4.2.1) (2026-02-20)
-
 
 ### Bug Fixes
 
@@ -93,7 +64,8 @@ All notable changes to this project will be documented in this file. See
 ### Bug Fixes
 
 * do not translate links starting with `/`
-  ([50ef9ef](https://github.com/IT-Service-NPM/remark-include/commit/50ef9ef36d378d16091ee66aea44d2b8c927cd81)), closes [#10](https://github.com/IT-Service-NPM/remark-include/issues/10)
+  ([50ef9ef](https://github.com/IT-Service-NPM/remark-include/commit/50ef9ef36d378d16091ee66aea44d2b8c927cd81)),
+  closes [#10](https://github.com/IT-Service-NPM/remark-include/issues/10)
 
 # [4.0.0](https://github.com/IT-Service-NPM/remark-include/compare/v3.2.0...v4.0.0) (2026-02-17)
 
