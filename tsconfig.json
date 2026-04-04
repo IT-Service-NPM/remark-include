@@ -33,6 +33,9 @@
 		"noEmitOnError": true,
 		"sourceMap": true,
 		"declaration": true,
-		"declarationMap": true
+		"declarationMap": true,
+		"types": [
+			"node"
+		]
 	}
 }
