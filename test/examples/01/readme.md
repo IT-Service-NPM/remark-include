@@ -5,16 +5,17 @@
 ```typescript file=./example.ts
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
-import { remarkIncludePresetSync } from '@it-service-npm/remark-include';
+import { remarkIncludePreset } from '@it-service-npm/remark-include/sync';
 import type { VFile } from 'vfile';
 
 export async function remarkDirectiveUsingExample(
   filePath: string
 ): Promise<VFile> {
   return remark()
-    .use(remarkIncludePresetSync)
+    .use(remarkIncludePreset)
     .process(await vFile.read(filePath));
 };
+
 ```
 
 Source files:
@@ -27,6 +28,7 @@ Hello. I am an main markdown file with `::include` directive.
 ::include{file=./included.md}
 
 _That_ should do it!
+
 ```
 
 included.md:
@@ -43,4 +45,5 @@ Hello. I am an main markdown file with `::include` directive.
 Hello. I am the included.
 
 *That* should do it!
+
 ```

@@ -17,7 +17,7 @@ An imported markdown file will "inherit" the heading levels. If the `::include{f
 **Signature:**
 
 ```typescript
-export declare function remarkIncludeSync(this: Processor): Transformer<Root>;
+export declare function remarkInclude(this: Processor): Transformer<Root>;
 ```
 
 ## Parameters

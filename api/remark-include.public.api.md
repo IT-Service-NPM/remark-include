@@ -16,9 +16,7 @@ export function remarkInclude(this: Processor): Transformer<Root>;
 export const remarkIncludePreset: Preset;
 
 // @public
-const remarkIncludePresetSync: Preset;
-export default remarkIncludePresetSync;
-export { remarkIncludePresetSync }
+export const remarkIncludePresetSync: Preset;
 
 // @public
 export function remarkIncludeSync(this: Processor): Transformer<Root>;
