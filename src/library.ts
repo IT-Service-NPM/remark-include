@@ -100,7 +100,7 @@ export function assertFilesExists(
  */
 export function assertFileDirnameIsDefined(
   file: VFile,
-  node: LeafDirective
+  node?: LeafDirective
 ): asserts file is VFile & { dirname: NonNullable<VFile['dirname']> } {
   if (typeof file.dirname === 'undefined') {
     file.fail(

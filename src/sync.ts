@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import path from 'node:path';
 import { globSync } from 'node:fs';
 import type { Transformer, Preset, Processor } from 'unified';
@@ -56,10 +57,11 @@ export function remarkInclude(
   return function (tree: Root, file: VFile): Root {
 
     const includeDirectives = getIncludeDirectives(tree, file);
-
+    assertFileDirnameIsDefined(file);
+    const fileDirname = path.resolve(file.dirname);
     for (const includeDirective of includeDirectives) {
+      let includedContent: RootContent[] = [];
       try {
-        assertFileDirnameIsDefined(file, includeDirective.node);
         const filePathGlob = includeDirective.node.attributes?.file;
         assertFileAttributeIsCorrect(
           filePathGlob,
@@ -73,45 +75,31 @@ export function remarkInclude(
           includeDirective.node, file, filePathGlob
         );
 
-        const includedContent: RootContent[] = includedFilesPaths.flatMap(
-          function (
-            _includedFilePath: string
-          ): RootContent[] {
-            const includedFilePath = path.resolve(
-              path.resolve(file.dirname),
-              _includedFilePath
-            );
-            const includedFile: VFile = readSync(includedFilePath, 'utf8');
-
-            const includedAST: Root = processor()
-              .data('topHeadingDepth', includeDirective.depth + 1)
-              .data('filePathChanges', {
-                sourcePath: includedFile.path,
-                destinationPath: file.path
-              })
-              .runSync(
-                processor.parse(includedFile),
-                includedFile
-              ) as Root;
-
-            return includedAST.children;
-          }
+        function getFileAST(_includedFilePath: string): RootContent[] {
+          const includedFilePath = path.resolve(fileDirname, _includedFilePath);
+          const includedFile: VFile = readSync(includedFilePath, 'utf8');
+          const _includedAST = processor.parse(includedFile);
+          const includedAST: Root = processor()
+            .data('topHeadingDepth', includeDirective.depth + 1)
+            .data('filePathChanges', {
+              sourcePath: includedFile.path,
+              destinationPath: file.path
+            })
+            .runSync(_includedAST, includedFile) as Root;
+          return includedAST.children;
+        }
+        includedContent = includedFilesPaths.flatMap(
+          (filePath: string) => getFileAST(filePath)
         );
-
-        includeDirective.parent.children.splice(
-          includeDirective.index, 1,
-          ...includedContent
-        );
-
       } catch (error) {
-        if ((error instanceof VFileMessage) && (!error.fatal)) {
-          includeDirective.parent.children.splice(
-            includeDirective.index, 1,
-          );
-        } else {
+        if (!((error instanceof VFileMessage) && (!error.fatal))) {
           throw error;
         }
       }
+      includeDirective.parent.children.splice(
+        includeDirective.index, 1,
+        ...includedContent
+      );
     }
     return tree;
   };

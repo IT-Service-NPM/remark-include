@@ -57,11 +57,11 @@ export function remarkInclude(
   return async function (tree: Root, file: VFile): Promise<Root> {
 
     const includeDirectives = getIncludeDirectives(tree, file);
-
+    assertFileDirnameIsDefined(file);
+    const fileDirname = path.resolve(file.dirname);
     for (const includeDirective of includeDirectives) {
+      let includedContent: RootContent[] = [];
       try {
-
-        assertFileDirnameIsDefined(file, includeDirective.node);
         const filePathGlob = includeDirective.node.attributes?.file;
         assertFileAttributeIsCorrect(
           filePathGlob,
@@ -76,47 +76,34 @@ export function remarkInclude(
         );
         includedFilesPaths.sort();
 
-        const _includedContent: RootContent[][] =
-          (await Promise.all(includedFilesPaths.map(
-            async function (
-              _includedFilePath: string
-            ): Promise<RootContent[]> {
-              const includedFilePath = path.resolve(
-                path.resolve(file.dirname),
-                _includedFilePath
-              );
-              const includedFile: VFile = await read(includedFilePath, 'utf8');
-
-              const includedAST: Root = await processor()
-                .data('topHeadingDepth', includeDirective.depth + 1)
-                .data('filePathChanges', {
-                  sourcePath: includedFile.path,
-                  destinationPath: file.path
-                })
-                .run(
-                  processor.parse(includedFile),
-                  includedFile
-                ) as Root;
-
-              return includedAST.children;
-            }
-          )));
-        const includedContent: RootContent[] = _includedContent.flat();
-
-        includeDirective.parent.children.splice(
-          includeDirective.index, 1,
-          ...includedContent
-        );
-
+        async function getFileAST(
+          _includedFilePath: string
+        ): Promise<RootContent[]> {
+          const includedFilePath = path.resolve(fileDirname, _includedFilePath);
+          const includedFile: VFile = await read(includedFilePath, 'utf8');
+          const _includedAST = processor.parse(includedFile);
+          const includedAST: Root = await processor()
+            .data('topHeadingDepth', includeDirective.depth + 1)
+            .data('filePathChanges', {
+              sourcePath: includedFile.path,
+              destinationPath: file.path
+            })
+            .run(_includedAST, includedFile) as Root;
+          return includedAST.children;
+        }
+        const _includedContent: RootContent[][] = (await Promise.all(
+          includedFilesPaths.map((filePath: string) => getFileAST(filePath))
+        ));
+        includedContent = _includedContent.flat();
       } catch (error) {
-        if ((error instanceof VFileMessage) && (!error.fatal)) {
-          includeDirective.parent.children.splice(
-            includeDirective.index, 1,
-          );
-        } else {
+        if (!((error instanceof VFileMessage) && (!error.fatal))) {
           throw error;
         }
       }
+      includeDirective.parent.children.splice(
+        includeDirective.index, 1,
+        ...includedContent
+      );
     }
     return tree;
   };
