@@ -133,14 +133,14 @@ npm install --save-dev @it-service-npm/remark-include
 ```typescript file=test/examples/01/example.ts
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
-import { remarkIncludePresetSync } from '@it-service-npm/remark-include';
+import { remarkIncludePreset } from '@it-service-npm/remark-include/sync';
 import type { VFile } from 'vfile';
 
 export async function remarkDirectiveUsingExample(
   filePath: string
 ): Promise<VFile> {
   return remark()
-    .use(remarkIncludePresetSync)
+    .use(remarkIncludePreset)
     .process(await vFile.read(filePath));
 };
 

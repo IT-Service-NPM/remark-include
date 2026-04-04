@@ -9,7 +9,7 @@ Preset of Remark plugins: [remarkIncludeSync()](./remark-include.remarkincludesy
 **Signature:**
 
 ```typescript
-remarkIncludePresetSync: Preset
+remarkIncludePreset: Preset
 ```
 
 ## Remarks

@@ -1,6 +1,6 @@
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
-import { remarkIncludePreset } from '@it-service-npm/remark-include';
+import { remarkIncludePreset } from '@it-service-npm/remark-include/async';
 import type { VFile } from 'vfile';
 
 export async function remarkDirectiveUsingExample(
