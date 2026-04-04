@@ -1,5 +1,33 @@
 <!-- markdownlint-configure-file
 {
+  'default': true,
+  'line-length': false,
+  'no-duplicate-heading': false,
+  'no-multiple-blanks': false,
+  'heading-increment': false,
+  'single-title': false
+}
+-->
+# 📓 Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [6.0.0](https://github.com/IT-Service-NPM/remark-include/compare/v5.0.1...v6.0.0) (2026-04-04)
+
+
+### Features
+
+* add /sync and /async exports for package ([c4172ca](https://github.com/IT-Service-NPM/remark-include/commit/c4172ca13433b03ae78d569978926e0d0b4cbccb))
+
+
+### BREAKING CHANGES
+
+* add /sync and /async exports for package
+with `RemarkInclude` and `RemarkIncludePreset` names.
+
+<!-- markdownlint-configure-file
+{
   "default": true,
   "line-length": false,
   "no-duplicate-heading": false,
