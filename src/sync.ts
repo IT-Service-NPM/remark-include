@@ -62,17 +62,13 @@ export function remarkInclude(
     for (const includeDirective of includeDirectives) {
       let includedContent: RootContent[] = [];
       try {
-        const filePathGlob = includeDirective.node.attributes?.file;
-        assertFileAttributeIsCorrect(
-          filePathGlob,
-          file, includeDirective.node
-        );
-        const includedFilesPaths = globSync(filePathGlob, {
-          cwd: path.resolve(file.dirname)
-        }).toSorted();
-        assertFilesExists(
-          includedFilesPaths,
-          includeDirective.node, file, filePathGlob
+        assertFileAttributeIsCorrect(file, includeDirective.node);
+        const includedFilesPaths = globSync(
+          includeDirective.node.attributes.file,
+          { cwd: path.resolve(file.dirname) }
+        ).toSorted();
+        assertFilesExists(file, includeDirective.node,
+          includedFilesPaths
         );
 
         function getFileAST(_includedFilePath: string): RootContent[] {

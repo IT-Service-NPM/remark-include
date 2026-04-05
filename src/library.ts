@@ -6,9 +6,9 @@ import { visit } from 'unist-util-visit';
 /**
  * Collect `::include` directives for processing
  *
- * @param tree source AST
- * @param _file source markdown file
- * @returns directives for later processing
+ * @param tree - Source AST
+ * @param _file - Source markdown file
+ * @returns Directives for later processing
  *
  * @internal
  */
@@ -52,22 +52,20 @@ export function getIncludeDirectives(tree: Root, _file: VFile): {
 type NonEmptyArray<T> = [T, ...T[]];
 
 /**
- * Send Remark error message when file from
+ * Send Remark error message when file (files) from
  * `::include` directive not found
  *
- * @param paths - files paths
- * @param node - include directive
- * @param file - current markdown file
- * @param fileAttribute - missing file path
- * @throws
+ * @param file - Current markdown file
+ * @param node - `::include` directive Node
+ * @param paths - Files paths
+ * @throws `VFileMessage` if file not found
  *
  * @internal
  */
 export function assertFilesExists(
-  paths: string[],
-  node: LeafDirective,
   file: VFile,
-  fileAttribute: string
+  node: LeafDirective,
+  paths: string[]
 ): asserts paths is NonEmptyArray<string> {
   if (paths.length === 0) {
     if (
@@ -75,13 +73,13 @@ export function assertFilesExists(
       typeof node.attributes?.optional === 'undefined'
     ) {
       file.fail(
-        `::include, file not found - "${fileAttribute}"`,
+        `::include, file not found - "${node.attributes?.file ?? ''}"`,
         node,
         '@it-service-npm/remark-include'
       );
     } else {
       throw file.info(
-        `::include, file not found - "${fileAttribute}"`,
+        `::include, file not found - "${node.attributes.file ?? ''}"`,
         node,
         '@it-service-npm/remark-include'
       );
@@ -90,45 +88,48 @@ export function assertFilesExists(
 }
 
 /**
- * Test for file.dirname is defined
+ * Test `file.dirname` expected
  *
- * @param file current markdown file
- * @param node include directive
- * @throws
+ * @param file - current markdown file
+ * @throws `VFileMessage` if `file.dirname` is undefined
  *
  * @internal
  */
 export function assertFileDirnameIsDefined(
-  file: VFile,
-  node?: LeafDirective
-): asserts file is VFile & { dirname: NonNullable<VFile['dirname']> } {
+  file: VFile
+): asserts file is VFile & { get dirname(): string } {
   if (typeof file.dirname === 'undefined') {
     file.fail(
-      '::include, unexpected error: "file" should be an instance of VFile',
-      node,
+      // eslint-disable-next-line max-len
+      '::include, unexpected error: "file" should be an instance of VFile with specified path',
+      undefined,
       '@it-service-npm/remark-include'
     );
   }
 }
 
 /**
- * Test `file` attribute
+ * Test `file` attribute of `::include` directive Node
  *
- * @param file current markdown file
- * @param node include directive
- * @throws
+ * @param file - Current markdown file
+ * @param node - `::include` directive Node
+ * @throws `VFileMessage` if `file` attribute
+ *  for `::include` directive does not exists or empty
  *
  * @internal
  */
 export function assertFileAttributeIsCorrect(
-  fileAttribute: any,
   file: VFile,
   node: LeafDirective
-): asserts fileAttribute is string {
-  if (
-    node.attributes?.file === null ||
-    typeof node.attributes?.file === 'undefined'
-  ) {
+): asserts node is LeafDirective & {
+  attributes: Record<string, string | null | undefined> & {
+    file: string
+  }
+} {
+  if (!(
+    (typeof node.attributes?.file === 'string') &&
+    (node.attributes.file.length > 0)
+  )) {
     file.fail(
       '::include, `file` attribute expected',
       node,
