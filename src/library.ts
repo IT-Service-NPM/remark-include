@@ -68,18 +68,19 @@ export function assertFilesExists(
   paths: string[]
 ): asserts paths is NonEmptyArray<string> {
   if (paths.length === 0) {
-    if (
-      node.attributes?.optional === null ||
-      typeof node.attributes?.optional === 'undefined'
+    if ((typeof node.attributes?.optional === 'string') && (
+      (node.attributes.optional === '') ||
+      (node.attributes.optional === 'true')
+    )
     ) {
-      file.fail(
-        `::include, file not found - "${node.attributes?.file ?? ''}"`,
+      throw file.info(
+        `::include, file not found - "${node.attributes.file ?? ''}"`,
         node,
         '@it-service-npm/remark-include'
       );
     } else {
-      throw file.info(
-        `::include, file not found - "${node.attributes.file ?? ''}"`,
+      file.fail(
+        `::include, file not found - "${node.attributes?.file ?? ''}"`,
         node,
         '@it-service-npm/remark-include'
       );
