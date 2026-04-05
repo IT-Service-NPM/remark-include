@@ -4,6 +4,6 @@ Hello. I am an main markdown file with `::include` directive.
 
 ::include{file=./included1.md}
 
-## in main file
+## H2 in main file
 
-_That_ should do it!
+End of main file.

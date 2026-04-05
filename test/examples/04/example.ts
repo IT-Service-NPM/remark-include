@@ -1,12 +1,12 @@
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
-import { remarkIncludePreset } from '@it-service-npm/remark-include';
+import { remarkIncludePreset } from '@it-service-npm/remark-include/sync';
 import type { VFile } from 'vfile';
 
-export async function remarkDirectiveUsingExample(
+export function remarkDirectiveUsingExample(
   filePath: string
-): Promise<VFile> {
+): VFile {
   return remark()
     .use(remarkIncludePreset)
-    .process(await vFile.read(filePath));
+    .processSync(vFile.readSync(filePath));
 };

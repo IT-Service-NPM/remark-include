@@ -5,12 +5,12 @@ import { remarkDirectiveUsingExample } from './example.ts';
 await describe('remark-include', async () => {
 
   await it('must support include directive in included files',
-    async (t: TestContext) => {
+    (t: TestContext) => {
       const _cwd = process.cwd();
       try {
         process.chdir(import.meta.dirname);
 
-        const outputFile = await remarkDirectiveUsingExample(
+        const outputFile = remarkDirectiveUsingExample(
           path.resolve(
             import.meta.dirname, 'fixtures',
             'main.md'

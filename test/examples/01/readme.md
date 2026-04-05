@@ -2,10 +2,20 @@
 
 `@it-service-npm/remark-include` can include sub-documents in markdown document.
 
+> [!TIP]
+> This plugin has two named entry points:
+>
+> - ‘sync’ ('@it-service-npm/remark-include/sync’)
+> - ‘async’ ('@it-service-npm/remark-include/async’)
+>
+> With sync and async plugin function and preset.
+
+Async plugin using example:
+
 ```typescript file=./example.ts
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
-import { remarkIncludePreset } from '@it-service-npm/remark-include/sync';
+import { remarkIncludePreset } from '@it-service-npm/remark-include/async';
 import type { VFile } from 'vfile';
 
 export async function remarkDirectiveUsingExample(

@@ -128,10 +128,20 @@ npm install --save-dev @it-service-npm/remark-include
 
 `@it-service-npm/remark-include` can include sub-documents in markdown document.
 
+> [!TIP]
+> This plugin has two named entry points:
+>
+> - ‘sync’ ('@it-service-npm/remark-include/sync’)
+> - ‘async’ ('@it-service-npm/remark-include/async’)
+>
+> With sync and async plugin function and preset.
+
+Async plugin using example:
+
 ```typescript file=test/examples/01/example.ts
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
-import { remarkIncludePreset } from '@it-service-npm/remark-include/sync';
+import { remarkIncludePreset } from '@it-service-npm/remark-include/async';
 import type { VFile } from 'vfile';
 
 export async function remarkDirectiveUsingExample(
@@ -196,7 +206,33 @@ After second file.
 
 ### Recursive transclusion
 
-`@it-service-npm/remark-include` directive supported in included files.
+`@it-service-npm/remark-include` support recursive transclusion.
+
+> [!TIP]
+> This plugin has two named entry points:
+>
+> - ‘sync’ ('@it-service-npm/remark-include/sync’)
+> - ‘async’ ('@it-service-npm/remark-include/async’)
+>
+> With sync and async plugin function and preset.
+
+Sync plugin using example:
+
+```typescript file=test/examples/04/example.ts
+import { remark } from 'remark';
+import * as vFile from 'to-vfile';
+import { remarkIncludePreset } from '@it-service-npm/remark-include/sync';
+import type { VFile } from 'vfile';
+
+export function remarkDirectiveUsingExample(
+  filePath: string
+): VFile {
+  return remark()
+    .use(remarkIncludePreset)
+    .processSync(vFile.readSync(filePath));
+};
+
+```
 
 Source files:
 
@@ -214,7 +250,8 @@ _That_ should do it!
 included1.md:
 
 ```markdown file=test/examples/04/fixtures/included1.md
-Hello. I am the included1.
+Hello. I am the included1 file with `::include` directive
+for recursive transclusion example.
 
 ::include{file=./included2.md}
 
@@ -223,7 +260,7 @@ Hello. I am the included1.
 included2.md:
 
 ```markdown file=test/examples/04/fixtures/included2.md
-Hello. I am the included2.
+Hello. I am the included2 file.
 
 ```
 
@@ -232,9 +269,10 @@ Remark output:
 ```markdown file=test/examples/04/snapshots/output.md
 Hello. I am an main markdown file with `::include` directive.
 
-Hello. I am the included1.
+Hello. I am the included1 file with `::include` directive
+for recursive transclusion example.
 
-Hello. I am the included2.
+Hello. I am the included2 file.
 
 *That* should do it!
 
@@ -255,24 +293,24 @@ Hello. I am an main markdown file with `::include` directive.
 
 ::include{file=./included1.md}
 
-## in main file
+## H2 in main file
 
-_That_ should do it!
+End of main file.
 
 ```
 
 included1.md:
 
 ```markdown file=test/examples/05/fixtures/included1.md
-# included1 file
+# included1 file H1 (should be changed to H2 in output file)
 
 Hello. I am the included1.
 
-## in included1 file
+## in included1 file H2 (should be changed to H3 in output file)
 
 ::include{file=./included2.md}
 
-## in included 1 file after included2
+## in included1 file after included2 H2 (should be changed to H3 in output file)
 
 text text text.
 
@@ -281,7 +319,7 @@ text text text.
 included2.md:
 
 ```markdown file=test/examples/05/fixtures/included2.md
-# included2 file
+# included2 file H1 (should be changed to H4 in output file)
 
 Hello. I am the included2.
 
@@ -294,23 +332,23 @@ Remark output:
 
 Hello. I am an main markdown file with `::include` directive.
 
-## included1 file
+## included1 file H1 (should be changed to H2 in output file)
 
 Hello. I am the included1.
 
-### in included1 file
+### in included1 file H2 (should be changed to H3 in output file)
 
-#### included2 file
+#### included2 file H1 (should be changed to H4 in output file)
 
 Hello. I am the included2.
 
-### in included 1 file after included2
+### in included1 file after included2 H2 (should be changed to H3 in output file)
 
 text text text.
 
-## in main file
+## H2 in main file
 
-*That* should do it!
+End of main file.
 
 ```
 
