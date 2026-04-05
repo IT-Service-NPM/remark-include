@@ -1,4 +1,3 @@
-/* eslint-disable max-statements */
 import path from 'node:path';
 import { globSync } from 'node:fs';
 import type { Transformer, Preset, Processor } from 'unified';
