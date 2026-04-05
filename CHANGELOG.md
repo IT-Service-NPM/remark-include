@@ -15,10 +15,8 @@ All notable changes to this project will be documented in this file. See
 
 ## [6.0.1](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.0...v6.0.1) (2026-04-05)
 
-
-### Bug Fixes
-
-* update readme and refactor code ([9b47aab](https://github.com/IT-Service-NPM/remark-include/commit/9b47aab7b1a0ea88a1b398d7b2922e57ffe3b13b))
+* update readme
+* refactor asserts
 
 # [6.0.0](https://github.com/IT-Service-NPM/remark-include/compare/v5.0.1...v6.0.0) (2026-04-04)
 
