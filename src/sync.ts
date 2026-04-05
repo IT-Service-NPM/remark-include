@@ -100,18 +100,27 @@ export function remarkInclude(
   };
 }
 
+/* eslint-disable max-len */
 /**
  * Preset of Remark plugins:
- * {@link remarkIncludeSync}
- * and {@link https://www.npmjs.com/package/remark-directive| remarkDirective}
  *
- * @remarks
+ * - {@link remarkIncludeSync}
  *
- * @see {@link remarkIncludeSync},
- * {@link https://www.npmjs.com/package/remark-directive| remarkDirective}
+ * - {@link https://www.npmjs.com/package/remark-directive|
+ *   remarkDirective}
+ *
+ * - {@link https://www.npmjs.com/package/@it-service-npm/remark-heading-adjustment|
+ *   remarkHeadingsAdjustment}
+ *
+ * - {@link https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment|
+ *   remarkRelativeUrlsAdjustment}
+ *
+ * - {@link https://www.npmjs.com/package/@it-service-npm/remark-code-path-adjustment|
+ *   remarkRelativeCodePathsAdjustment}
  *
  * @public
  */
+/* eslint-enable max-len */
 export const remarkIncludePreset: Preset = {
   plugins: [
     remarkDirective,

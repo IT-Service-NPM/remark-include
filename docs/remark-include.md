@@ -93,7 +93,17 @@ Description
 
 </td><td>
 
-Preset of Remark plugins: [remarkInclude()](./remark-include.remarkinclude.md) and [remarkDirective](https://www.npmjs.com/package/remark-directive)
+Preset of Remark plugins:
+
+- [remarkInclude()](./remark-include.remarkinclude.md)
+
+- [remarkDirective](https://www.npmjs.com/package/remark-directive)
+
+- [remarkHeadingsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-heading-adjustment)
+
+- [remarkRelativeUrlsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment)
+
+- [remarkRelativeCodePathsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-code-path-adjustment)
 
 
 </td></tr>
@@ -104,7 +114,17 @@ Preset of Remark plugins: [remarkInclude()](./remark-include.remarkinclude.md) a
 
 </td><td>
 
-Preset of Remark plugins: [remarkIncludeSync()](./remark-include.remarkincludesync.md) and [remarkDirective](https://www.npmjs.com/package/remark-directive)
+Preset of Remark plugins:
+
+- [remarkIncludeSync()](./remark-include.remarkincludesync.md)
+
+- [remarkDirective](https://www.npmjs.com/package/remark-directive)
+
+- [remarkHeadingsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-heading-adjustment)
+
+- [remarkRelativeUrlsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment)
+
+- [remarkRelativeCodePathsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-code-path-adjustment)
 
 
 </td></tr>

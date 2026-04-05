@@ -4,14 +4,20 @@
 
 ## remarkIncludePreset variable
 
-Preset of Remark plugins: [remarkInclude()](./remark-include.remarkinclude.md) and [remarkDirective](https://www.npmjs.com/package/remark-directive)
+Preset of Remark plugins:
+
+- [remarkInclude()](./remark-include.remarkinclude.md)
+
+- [remarkDirective](https://www.npmjs.com/package/remark-directive)
+
+- [remarkHeadingsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-heading-adjustment)
+
+- [remarkRelativeUrlsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment)
+
+- [remarkRelativeCodePathsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-code-path-adjustment)
 
 **Signature:**
 
 ```typescript
 remarkIncludePreset: Preset
 ```
-
-## Remarks
-
-
