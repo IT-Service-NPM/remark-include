@@ -6,13 +6,19 @@
 
 Async Remark plugin fabric function.
 
-With this plugin, you can use `::include{file=./included.md}` statements to compose markdown files together.
+With this plugin, you can use `::include{file=./included.md}` [GitLab transclusion syntax](https://docs.gitlab.com/user/markdown/#includes) statements to compose markdown files together.
 
-This plugin is a modern fork of [remark-import](https://github.com/BrekiTomasson/remark-import) and [remark-include](https://github.com/Qard/remark-include)<!-- -->, compatible with Remark v15.
+Additional features:
 
-Relative images and links in the imported files will have their paths rewritten to be relative the original document rather than the imported file.
+- GitLab include directives inside the included file are ignored, but this plugin support recursive transclusion
 
-An imported markdown file will "inherit" the heading levels. If the `::include{file=./included.md}` statement happens under Heading 2, for example, any heading 1 in the included file will be "translated" to have header level 3.
+- It is possible to use globs (`::include{file="./included*.md"}`<!-- -->) in `file` attribute
+
+- Introduce a new attribute called `optional`<!-- -->. This attribute prevents fatal errors from occurring when the file or files specified by the `file` attribute do not exist
+
+- Relative images and links in the imported files will have their paths rewritten to be relative the original document rather than the imported file (with [\`@it-service-npm/remark-relative-url-adjustment\`](https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment)<!-- -->)
+
+- An imported markdown file will "inherit" the heading levels. If the `::include{file=./included.md}` statement happens under Heading 2, for example, any heading 1 in the included file will be "translated" to have header level 3 (with [\`@it-service-npm/remark-heading-adjustment\`](https://www.npmjs.com/package/@it-service-npm/remark-heading-adjustment)<!-- -->)
 
 **Signature:**
 
@@ -57,7 +63,4 @@ Processor
 **Returns:**
 
 Transformer&lt;Root&gt;
-
-## Remarks
-
 
