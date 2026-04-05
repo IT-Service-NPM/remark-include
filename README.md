@@ -165,7 +165,7 @@ Hello. I am an main markdown file with `::include` directive.
 
 After first file.
 
-::include{file=./included2.md}
+::include{file="./included 2.md"}
 
 After second file.
 
@@ -180,9 +180,9 @@ Hello. I am the included1 file.
 
 ```
 
-included2.md:
+included 2.md:
 
-```markdown file=test/examples/01/fixtures/included2.md
+```markdown file=test/examples/01/fixtures/included\ 2.md
 Hello. I am the included2 file.
 
 ```

@@ -4,7 +4,7 @@ Hello. I am an main markdown file with `::include` directive.
 
 After first file.
 
-::include{file=./included2.md}
+::include{file="./included 2.md"}
 
 After second file.
 
