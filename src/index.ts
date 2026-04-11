@@ -44,5 +44,5 @@ export {
 } from './sync.js';
 export {
   remarkInclude,
-  remarkIncludePreset
+  remarkIncludePreset, remarkIncludePreset as default
 } from './async.js';

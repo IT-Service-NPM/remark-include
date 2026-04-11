@@ -13,7 +13,9 @@ import type { Transformer } from 'unified';
 export function remarkInclude(this: Processor): Transformer<Root>;
 
 // @public
-export const remarkIncludePreset: Preset;
+const remarkIncludePreset: Preset;
+export default remarkIncludePreset;
+export { remarkIncludePreset }
 
 // @public
 export const remarkIncludePresetSync: Preset;
