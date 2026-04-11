@@ -8,7 +8,8 @@
 	},
 	"files.associations": {
 		"LICENSE": "plaintext",
-		"NOTICE": "plaintext"
+		"NOTICE": "plaintext",
+		"*.mdp": "markdown"
 	},
 	"[markdown]": {
 		"editor.formatOnSave": true,
