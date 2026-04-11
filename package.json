@@ -55,8 +55,8 @@
 		"lint": "tsc && eslint",
 		"test": "node --import tsx --experimental-transform-types --experimental-test-module-mocks --experimental-test-coverage --test-reporter=spec --test-reporter=junit --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=test/results/junit-report.xml --test-reporter-destination=coverage/lcov.info --test",
 		"test:snapshots": "node --import tsx --experimental-transform-types --experimental-test-module-mocks --test-update-snapshots --test",
-		"build:readme:API": "npx api-extractor run --local && npx api-documenter markdown -i temp -o docs",
-		"build:readme:examples": "remark test/examples/*/readme.md --output",
+		"build:readme:API": "api-extractor run --local && npx api-documenter markdown -i temp -o docs",
+		"build:readme:examples": "glob-exec --parallel --foreach test/examples/*/readme.mdp \"remark {{file}} --output {{file.dir}}/readme.md\"",
 		"build:readme:main": "remark readme.mdp --output README.md",
 		"build:readme": "pnpm run build:readme:examples && pnpm run build:readme:main",
 		"build:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
@@ -93,6 +93,7 @@
 		"eslint-plugin-sonarjs": "^4.0.2",
 		"eslint-plugin-tsdoc": "^0.5.2",
 		"eslint-plugin-unicorn": "^63.0.0",
+		"glob-exec": "^0.1.1",
 		"mdast-util-directive": "^3.1.0",
 		"remark": "^15.0.1",
 		"remark-cli": "^12.0.1",
