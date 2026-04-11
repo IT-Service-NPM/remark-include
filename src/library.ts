@@ -74,15 +74,13 @@ export function assertFilesExists(
     )
     ) {
       throw file.info(
-        `::include, file not found - "${node.attributes.file ?? ''}"`,
-        node,
-        '@it-service-npm/remark-include'
+        `file(s) "${node.attributes.file ?? ''}" not found`,
+        node
       );
     } else {
       file.fail(
-        `::include, file not found - "${node.attributes?.file ?? ''}"`,
-        node,
-        '@it-service-npm/remark-include'
+        `file(s) "${node.attributes?.file ?? ''}" not found`,
+        node
       );
     }
   }
@@ -102,9 +100,7 @@ export function assertFileDirnameIsDefined(
   if (typeof file.dirname === 'undefined') {
     file.fail(
       // eslint-disable-next-line max-len
-      '::include, unexpected error: "file" should be an instance of VFile with specified path',
-      undefined,
-      '@it-service-npm/remark-include'
+      '::include, unexpected error: "file" should be an instance of VFile with specified path'
     );
   }
 }
@@ -133,8 +129,7 @@ export function assertFileAttributeIsCorrect(
   )) {
     file.fail(
       '::include, `file` attribute expected',
-      node,
-      '@it-service-npm/remark-include'
+      node
     );
   }
 }
