@@ -15,17 +15,17 @@ All notable changes to this project will be documented in this file. See
 
 ## [6.0.3](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.2...v6.0.3) (2026-04-11)
 
-
 ### Bug Fixes
 
-* fix error messages ([04693d3](https://github.com/IT-Service-NPM/remark-include/commit/04693d341f4af70ef3f0f341fd3f9519b42391c4))
+* update error messages (remove `origin` from messages)
+  ([04693d3](https://github.com/IT-Service-NPM/remark-include/commit/04693d341f4af70ef3f0f341fd3f9519b42391c4))
 
 ## [6.0.2](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.1...v6.0.2) (2026-04-05)
 
-
 ### Bug Fixes
 
-* fix `optional` attrubute checking ([60b7db0](https://github.com/IT-Service-NPM/remark-include/commit/60b7db018ae813fb76799c216af5438c6ab45ad3))
+* fix `optional` attribute checking
+  ([60b7db0](https://github.com/IT-Service-NPM/remark-include/commit/60b7db018ae813fb76799c216af5438c6ab45ad3))
 
 ## [6.0.1](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.0...v6.0.1) (2026-04-05)
 
