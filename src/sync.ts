@@ -16,8 +16,8 @@ import {
   remarkRelativeCodePathsAdjustment
 } from '@it-service-npm/remark-code-path-adjustment';
 import {
-  getIncludeDirectives,
-  assertFilesExists, assertFileAttributeIsCorrect, assertFileDirnameIsDefined
+  getIncludeDirectives, getAttributes,
+  assertFilesExists, assertFileDirnameIsDefined
 } from './library.js';
 
 /* eslint-disable max-len */
@@ -68,13 +68,13 @@ export function remarkInclude(
     for (const includeDirective of includeDirectives) {
       let includedContent: RootContent[] = [];
       try {
-        assertFileAttributeIsCorrect(file, includeDirective.node);
+        const attributes = getAttributes(file, includeDirective.node);
         const includedFilesPaths = globSync(
-          includeDirective.node.attributes.file,
+          attributes.file,
           { cwd: path.resolve(file.dirname) }
         ).toSorted();
         assertFilesExists(file, includeDirective.node,
-          includedFilesPaths
+          attributes, includedFilesPaths
         );
 
         function getFileAST(_includedFilePath: string): RootContent[] {

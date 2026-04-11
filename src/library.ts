@@ -3,6 +3,11 @@ import type { LeafDirective } from 'mdast-util-directive';
 import type { VFile } from 'vfile';
 import { visit } from 'unist-util-visit';
 
+export interface DirectiveAttributes {
+  file: string;
+  optional: boolean;
+}
+
 /**
  * Collect `::include` directives for processing
  *
@@ -57,6 +62,7 @@ type NonEmptyArray<T> = [T, ...T[]];
  *
  * @param file - Current markdown file
  * @param node - `::include` directive Node
+ * @param attributes - `::include` directive attributes
  * @param paths - Files paths
  * @throws `VFileMessage` if file not found
  *
@@ -65,21 +71,18 @@ type NonEmptyArray<T> = [T, ...T[]];
 export function assertFilesExists(
   file: VFile,
   node: LeafDirective,
+  attributes: DirectiveAttributes,
   paths: string[]
 ): asserts paths is NonEmptyArray<string> {
   if (paths.length === 0) {
-    if ((typeof node.attributes?.optional === 'string') && (
-      (node.attributes.optional === '') ||
-      (node.attributes.optional === 'true')
-    )
-    ) {
+    if (attributes.optional) {
       throw file.info(
-        `file(s) "${node.attributes.file!}" not found`,
+        `file(s) "${attributes.file}" not found`,
         node
       );
     } else {
       file.fail(
-        `file(s) "${node.attributes!.file!}" not found`,
+        `file(s) "${attributes.file}" not found`,
         node
       );
     }
@@ -106,7 +109,7 @@ export function assertFileDirnameIsDefined(
 }
 
 /**
- * Test `file` attribute of `::include` directive Node
+ * Test and return attributes of `::include` directive Node
  *
  * @param file - Current markdown file
  * @param node - `::include` directive Node
@@ -115,14 +118,17 @@ export function assertFileDirnameIsDefined(
  *
  * @internal
  */
-export function assertFileAttributeIsCorrect(
+// eslint-disable-next-line max-statements
+export function getAttributes(
   file: VFile,
   node: LeafDirective
-): asserts node is LeafDirective & {
-  attributes: Record<string, string | null | undefined> & {
-    file: string
-  }
-} {
+): DirectiveAttributes {
+
+  const attributes: DirectiveAttributes = {
+    file: '',
+    optional: false
+  };
+
   if (!(
     (typeof node.attributes?.file === 'string') &&
     (node.attributes.file.length > 0)
@@ -132,4 +138,39 @@ export function assertFileAttributeIsCorrect(
       node
     );
   }
+  attributes.file = node.attributes.file;
+
+  if (typeof node.attributes.optional === 'string') {
+    switch (node.attributes.optional) {
+      case '':
+      case 'true': {
+        attributes.optional = true;
+        break;
+      }
+      case 'false': {
+        break;
+      }
+      default: {
+        file.fail(
+          // eslint-disable-next-line max-len
+          `::include, \`optional\` attribute invalid value "${node.attributes.optional}"`,
+          node
+        );
+      }
+    };
+  }
+
+  const unexpectedAttributes = Object.keys(node.attributes)
+    .filter((attribute) => !(['file', 'optional'].includes(attribute)));
+  if (unexpectedAttributes.length > 0) {
+    const attributeList = unexpectedAttributes
+      .map((s) => `\`${s}\``)
+      .join(', ');
+    file.fail(
+      `::include, unknown attribute(s): ${attributeList}`,
+      node
+    );
+  }
+
+  return attributes;
 }
