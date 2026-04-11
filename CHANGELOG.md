@@ -52,9 +52,9 @@ All notable changes to this project will be documented in this file. See
 ### BREAKING CHANGES
 
 * extracted and used plugins
-@it-service-npm/remark-heading-adjustment,
-@it-service-npm/remark-relative-url-adjustment,
-@it-service-npm/remark-code-path-adjustment
+  @it-service-npm/remark-heading-adjustment,
+  @it-service-npm/remark-relative-url-adjustment,
+  @it-service-npm/remark-code-path-adjustment
 
 ## [4.2.1](https://github.com/IT-Service-NPM/remark-include/compare/v4.2.0...v4.2.1) (2026-02-20)
 
