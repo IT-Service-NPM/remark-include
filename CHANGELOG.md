@@ -13,6 +13,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.4](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.3...v6.0.4) (2026-04-11)
+
+
+### Bug Fixes
+
+* directive attributes validation ([0432d90](https://github.com/IT-Service-NPM/remark-include/commit/0432d902afc298a68d0f9bdbbd9af5fbd1457f4b))
+
 ## [6.0.3](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.2...v6.0.3) (2026-04-11)
 
 ### Bug Fixes
