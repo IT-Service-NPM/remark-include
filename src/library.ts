@@ -74,12 +74,12 @@ export function assertFilesExists(
     )
     ) {
       throw file.info(
-        `file(s) "${node.attributes.file ?? ''}" not found`,
+        `file(s) "${node.attributes.file!}" not found`,
         node
       );
     } else {
       file.fail(
-        `file(s) "${node.attributes?.file ?? ''}" not found`,
+        `file(s) "${node.attributes!.file!}" not found`,
         node
       );
     }
