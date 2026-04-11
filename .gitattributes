@@ -1,4 +1,5 @@
 *.md       text  merge=text diff=text eol=lf
+*.mdp      text  merge=text diff=text eol=lf
 
 *.json     text  merge=json diff=text eol=lf
 *.js       text  merge=text diff=text eol=lf
