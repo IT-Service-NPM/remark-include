@@ -96,9 +96,6 @@ importers:
       glob-exec:
         specifier: ^0.1.1
         version: 0.1.1
-      jake:
-        specifier: ^11.9.5
-        version: 11.9.5
       mdast-util-directive:
         specifier: ^3.1.0
         version: 3.1.0
@@ -950,9 +947,6 @@ packages:
   array-ify@1.0.0:
     resolution: {integrity: sha512-c5AMf34bKdvPhQ7tBGhqkgKNUzMr4WUs+WDtC2ZUGOUncbxKMTvqxYctiseW3+L4bA8ec+GcZ6/A/FW4m8ukng==}
 
-  async@3.2.6:
-    resolution: {integrity: sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA==}
-
   author-regex@1.0.0:
     resolution: {integrity: sha512-KbWgR8wOYRAPekEmMXrYYdc7BRyhn2Ftk7KWfMUnQ43hFdojWEFRxhhRUm3/OFEdPa1r0KAvTTg9YQK57xTe0g==}
     engines: {node: '>=0.8'}
@@ -1350,10 +1344,6 @@ packages:
     resolution: {integrity: sha512-XXTUwCvisa5oacNGRP9SfNtYBNAMi+RPwBFmblZEF7N7swHYQS6/Zfk7SRwx4D5j3CH211YNRco1DEMNVfZCnQ==}
     engines: {node: '>=16.0.0'}
 
-  filelist@2.0.1:
-    resolution: {integrity: sha512-dtCfX3VwE/ApL3Sy0yR+5w2tBI16Ny72YDTZDwS+PjQzD61rxGDGxitC4xfnTGIeDbbW/WrI+O44wyzHQUem9A==}
-    engines: {node: 20 || >=22}
-
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
@@ -1590,11 +1580,6 @@ packages:
 
   jackspeak@3.4.3:
     resolution: {integrity: sha512-OGlZQpz2yfahA/Rd1Y8Cd9SIEsqvXkLVoSw/cgwhnhFMDbsQFeZYoJJ7bIZBS9BcamUW96asq/npPWugM+RQBw==}
-
-  jake@11.9.5:
-    resolution: {integrity: sha512-dUI1EpaL4ro0eR+ONLIivTooIwcqK5UXJyjtjkTk554HzuFUmeIF4b0BwIbTU8GtX3xmLqpSaPxNQnhvZWxVYA==}
-    engines: {node: '>=10'}
-    hasBin: true
 
   jiti@2.6.1:
     resolution: {integrity: sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==}
@@ -3451,8 +3436,6 @@ snapshots:
 
   array-ify@1.0.0: {}
 
-  async@3.2.6: {}
-
   author-regex@1.0.0: {}
 
   bail@2.0.2: {}
@@ -3896,10 +3879,6 @@ snapshots:
     dependencies:
       flat-cache: 4.0.1
 
-  filelist@2.0.1:
-    dependencies:
-      minimatch: 10.2.4
-
   fill-range@7.1.1:
     dependencies:
       to-regex-range: 5.0.1
@@ -4106,12 +4085,6 @@ snapshots:
       '@isaacs/cliui': 8.0.2
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
-
-  jake@11.9.5:
-    dependencies:
-      async: 3.2.6
-      filelist: 2.0.1
-      picocolors: 1.1.1
 
   jiti@2.6.1: {}
 
