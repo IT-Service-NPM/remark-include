@@ -8,6 +8,13 @@ export interface DirectiveAttributes {
   optional: boolean;
 }
 
+export interface DirectiveInfo {
+  node: LeafDirective,
+  index: number,
+  parent: Parent,
+  depth: number
+}
+
 /**
  * Collect `::include` directives for processing
  *
@@ -17,20 +24,12 @@ export interface DirectiveAttributes {
  *
  * @internal
  */
-export function getIncludeDirectives(tree: Root, _file: VFile): {
-  node: LeafDirective,
-  index: number,
-  parent: Parent,
-  depth: number
-}[] {
+export function getIncludeDirectives(
+  tree: Root, _file: VFile
+): DirectiveInfo[] {
 
   let depth = 0;
-  const includeDirectives: {
-    node: LeafDirective,
-    index: number,
-    parent: Parent,
-    depth: number
-  }[] = [];
+  const includeDirectives: DirectiveInfo[] = [];
 
   visit(
     tree,
@@ -39,7 +38,7 @@ export function getIncludeDirectives(tree: Root, _file: VFile): {
         depth = node.depth;
       } else if (
         (node.type === 'leafDirective') &&
-        ((node).name === 'include')
+        (node.name === 'include')
       ) {
         includeDirectives.unshift({
           node: node,
