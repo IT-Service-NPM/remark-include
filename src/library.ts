@@ -161,7 +161,7 @@ export function getAttributes(
   }
 
   const unexpectedAttributes = Object.keys(node.attributes)
-    .filter((attribute) => !(['file', 'optional'].includes(attribute)));
+    .filter((attribute) => !(Object.keys(attributes).includes(attribute)));
   if (unexpectedAttributes.length > 0) {
     const attributeList = unexpectedAttributes
       .map((s) => `\`${s}\``)
