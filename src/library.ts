@@ -101,7 +101,6 @@ export function assertFileDirnameIsDefined(
 ): asserts file is VFile & { get dirname(): string } {
   if (typeof file.dirname === 'undefined') {
     file.fail(
-      // eslint-disable-next-line max-len
       '::include, unexpected error: "file" should be an instance of VFile with specified path'
     );
   }
@@ -151,7 +150,6 @@ export function getAttributes(
       }
       default: {
         file.fail(
-          // eslint-disable-next-line max-len
           `::include, \`optional\` attribute invalid value "${node.attributes.optional}"`,
           node
         );

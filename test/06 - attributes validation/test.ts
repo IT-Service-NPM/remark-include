@@ -6,7 +6,6 @@ import { remarkIncludePresetSync } from '@it-service-npm/remark-include';
 
 await describe('remark-include', async () => {
 
-  // eslint-disable-next-line max-len
   await it('send a FAIL message to the remark processor if the file attribute is missing',
     async (t: TestContext) => {
 
@@ -41,7 +40,6 @@ await describe('remark-include', async () => {
     }
   );
 
-  // eslint-disable-next-line max-len
   await it('send a FAIL message to the remark processor If unknown attributes are discovered',
     async (t: TestContext) => {
 
@@ -76,7 +74,6 @@ await describe('remark-include', async () => {
     }
   );
 
-  // eslint-disable-next-line max-len
   await it('send a FAIL message to the remark processor If unexpected optional value presents',
     async (t: TestContext) => {
 

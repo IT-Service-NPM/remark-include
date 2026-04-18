@@ -4,6 +4,7 @@ import ESLintJs from '@eslint/js';
 import ESLintPluginN from 'eslint-plugin-n';
 import ESLintPluginTSDoc from 'eslint-plugin-tsdoc';
 import ESLintPluginTypescript from 'typescript-eslint';
+import ESLintPluginStylistic from '@stylistic/eslint-plugin';
 import ESLintPluginPrettier from 'eslint-plugin-prettier';
 import ESLintPluginUnicorn from 'eslint-plugin-unicorn';
 import ESLintConfigPrettier from 'eslint-config-prettier';
@@ -15,15 +16,18 @@ export default defineConfig([
     extends: [
       ESLintPluginSonarJs.configs.recommended,
       ESLintJs.configs.recommended,
+      ESLintPluginStylistic.configs.recommended,
       // ESLintPluginTypescript.configs.recommendedTypeChecked,
       ...ESLintPluginTypescript.configs.strictTypeChecked,
       ...ESLintPluginTypescript.configs.stylisticTypeChecked,
       ESLintPluginUnicorn.configs.recommended,
       ESLintConfigPrettier,
-      ESLintPluginDepend.configs['flat/recommended']
+      ESLintPluginDepend.configs['flat/recommended'],
+      ESLintPluginStylistic.configs['disable-legacy']
     ],
     plugins: {
       'n': ESLintPluginN,
+      '@stylistic': ESLintPluginStylistic,
       'prettier': ESLintPluginPrettier,
       'unicorn': ESLintPluginUnicorn,
       'depend': ESLintPluginDepend.default
@@ -38,7 +42,14 @@ export default defineConfig([
       'eol-last': 'error',
       'eqeqeq': ['error', 'smart'],
       'max-depth': ['warn', 3],
-      'max-len': ['warn', 80],
+      '@stylistic/max-len': ['warn', {
+        code: 80,
+        // 'ignoreComments': true,
+        ignoreUrls: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+        ignoreRegExpLiterals: true
+      }],
       'max-statements': ['warn', 15],
       'new-cap': 'warn',
       'no-extend-native': 'error',
@@ -80,10 +91,10 @@ export default defineConfig([
     ],
     plugins: {
       n: ESLintPluginN,
+      '@stylistic': ESLintPluginStylistic,
       tsdoc: (ESLintPluginTSDoc as ESLint.Plugin),
       prettier: ESLintPluginPrettier,
       unicorn: ESLintPluginUnicorn
-
     },
     rules: {
       'no-unused-vars': 'off',
@@ -101,6 +112,7 @@ export default defineConfig([
     files: ['test/**/*.test.ts'],
     plugins: {
       n: ESLintPluginN,
+      '@stylistic': ESLintPluginStylistic,
       prettier: ESLintPluginPrettier
     },
     rules: {

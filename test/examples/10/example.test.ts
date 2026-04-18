@@ -28,7 +28,6 @@ await describe('remark-include', async () => {
     }
   );
 
-  // eslint-disable-next-line max-len
   await it('leave links (url) starting with `/` (relative to the repository root)',
     async (t: TestContext) => {
       const _cwd = process.cwd();

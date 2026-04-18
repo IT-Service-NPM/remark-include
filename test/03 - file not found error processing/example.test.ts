@@ -19,7 +19,6 @@ await describe('remarkIncludeSync', async () => {
       .freeze();
   });
 
-  // eslint-disable-next-line max-len
   await it('send a INFO message to the remark processor if the file is not found and an optional attribute is present',
     async (t: TestContext) => {
 
@@ -45,7 +44,6 @@ await describe('remarkIncludeSync', async () => {
     }
   );
 
-  // eslint-disable-next-line max-len
   await it('send a FAIL message to the remark processor if the file is not found and an optional attribute is not present',
     async (t: TestContext) => {
 
@@ -68,7 +66,6 @@ await describe('remarkIncludeSync', async () => {
     }
   );
 
-  // eslint-disable-next-line max-len
   await it('send a INFO message to the remark processor if the file is not found with glob and an optional attribute is present',
     async (t: TestContext) => {
 
@@ -94,7 +91,6 @@ await describe('remarkIncludeSync', async () => {
     }
   );
 
-  // eslint-disable-next-line max-len
   await it('send a FAIL message to the remark processor if the file is not found with glob and an optional attribute is not present',
     async (t: TestContext) => {
 
@@ -129,7 +125,6 @@ await describe('remarkInclude', async () => {
       .freeze();
   });
 
-  // eslint-disable-next-line max-len
   await it('send a INFO message to the remark processor if the file is not found and an optional attribute is present',
     async (t: TestContext) => {
 
@@ -155,7 +150,6 @@ await describe('remarkInclude', async () => {
     }
   );
 
-  // eslint-disable-next-line max-len
   await it('send a FAIL message to the remark processor if the file is not found and an optional attribute is not present',
     async (t: TestContext) => {
 
@@ -178,7 +172,6 @@ await describe('remarkInclude', async () => {
     }
   );
 
-  // eslint-disable-next-line max-len
   await it('send a INFO message to the remark processor if the file is not found with glob and an optional attribute is present',
     async (t: TestContext) => {
 
@@ -204,7 +197,6 @@ await describe('remarkInclude', async () => {
     }
   );
 
-  // eslint-disable-next-line max-len
   await it('send a FAIL message to the remark processor if the file is not found with glob and an optional attribute is not present',
     async (t: TestContext) => {
 

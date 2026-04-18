@@ -20,7 +20,6 @@ import {
   assertFilesExists, assertFileDirnameIsDefined
 } from './library.js';
 
-/* eslint-disable max-len */
 /**
  * Sync Remark plugin fabric function.
  *
@@ -53,7 +52,6 @@ import {
  *
  * @public
  */
-/* eslint-enable max-len */
 export function remarkInclude(
   this: Processor
 ): Transformer<Root> {
@@ -107,7 +105,6 @@ export function remarkInclude(
   };
 }
 
-/* eslint-disable max-len */
 /**
  * Preset of Remark plugins:
  *
@@ -123,7 +120,6 @@ export function remarkInclude(
  *
  * @public
  */
-/* eslint-enable max-len */
 export const remarkIncludePreset: Preset = {
   plugins: [
     remarkDirective,

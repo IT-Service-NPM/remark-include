@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /**
  * With this plugin, you can use `::include{file=./included.md}`
  * {@link https://docs.gitlab.com/user/markdown/#includes|
