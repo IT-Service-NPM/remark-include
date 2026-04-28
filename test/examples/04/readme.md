@@ -12,7 +12,7 @@
 
 Sync plugin using example:
 
-```typescript file=./example.ts
+```typescript
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
 import { remarkIncludePreset } from '@it-service-npm/remark-include/sync';
@@ -25,42 +25,38 @@ export function remarkDirectiveUsingExample(
     .use(remarkIncludePreset)
     .processSync(vFile.readSync(filePath));
 };
-
 ```
 
 Source files:
 
 main.md:
 
-```markdown file=fixtures/main.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 ::include{file=./included1.md}
 
 _That_ should do it!
-
 ```
 
 included1.md:
 
-```markdown file=fixtures/included1.md
+```markdown
 Hello. I am the included1 file with `::include` directive
 for recursive transclusion example.
 
 ::include{file=./included2.md}
-
 ```
 
 included2.md:
 
-```markdown file=fixtures/included2.md
+```markdown
 Hello. I am the included2 file.
-
 ```
 
 Remark output:
 
-```markdown file=snapshots/output.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 Hello. I am the included1 file with `::include` directive
@@ -69,5 +65,4 @@ for recursive transclusion example.
 Hello. I am the included2 file.
 
 *That* should do it!
-
 ```

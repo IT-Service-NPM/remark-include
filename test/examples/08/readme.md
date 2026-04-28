@@ -8,7 +8,7 @@ Source files:
 
 main.md:
 
-```markdown file=fixtures/main.md
+```markdown
 # main file
 
 Hello. I am an main markdown file with `::include` directive.
@@ -20,7 +20,7 @@ _That_ should do it!
 
 included1.md:
 
-```markdown file=fixtures/included1.md
+```markdown
 # included 1
 
 Hello. I am the included1.
@@ -28,7 +28,7 @@ Hello. I am the included1.
 
 included2.md:
 
-```markdown file=fixtures/included2.md
+```markdown
 # included 2
 
 Hello. I am the included2.
@@ -36,7 +36,7 @@ Hello. I am the included2.
 
 included3.md:
 
-```markdown file=fixtures/included3.md
+```markdown
 # included 3
 
 Hello. I am the included3.
@@ -44,7 +44,7 @@ Hello. I am the included3.
 
 Remark output:
 
-```markdown file=snapshots/output.md
+```markdown
 # main file
 
 Hello. I am an main markdown file with `::include` directive.

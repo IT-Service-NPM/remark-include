@@ -12,62 +12,22 @@
 
 Sync plugin using example:
 
-```typescript file=./example.ts
-import { remark } from 'remark';
-import * as vFile from 'to-vfile';
-import { remarkIncludePreset } from '@it-service-npm/remark-include/sync';
-import type { VFile } from 'vfile';
-
-export function remarkDirectiveUsingExample(
-  filePath: string
-): VFile {
-  return remark()
-    .use(remarkIncludePreset)
-    .processSync(vFile.readSync(filePath));
-};
-
-```
+::include-code{file=./example.ts language=typescript}
 
 Source files:
 
 main.md:
 
-```markdown file=fixtures/main.md
-Hello. I am an main markdown file with `::include` directive.
-
-::include{file=./included1.md}
-
-_That_ should do it!
-
-```
+::include-code{file=fixtures/main.md language=markdown}
 
 included1.md:
 
-```markdown file=fixtures/included1.md
-Hello. I am the included1 file with `::include` directive
-for recursive transclusion example.
-
-::include{file=./included2.md}
-
-```
+::include-code{file=fixtures/included1.md language=markdown}
 
 included2.md:
 
-```markdown file=fixtures/included2.md
-Hello. I am the included2 file.
-
-```
+::include-code{file=fixtures/included2.md language=markdown}
 
 Remark output:
 
-```markdown file=snapshots/output.md
-Hello. I am an main markdown file with `::include` directive.
-
-Hello. I am the included1 file with `::include` directive
-for recursive transclusion example.
-
-Hello. I am the included2 file.
-
-*That* should do it!
-
-```
+::include-code{file=snapshots/output.md language=markdown}

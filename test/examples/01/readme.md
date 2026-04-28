@@ -12,7 +12,7 @@
 
 Async plugin using example:
 
-```typescript file=./example.ts
+```typescript
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
 import { remarkIncludePreset } from '@it-service-npm/remark-include/async';
@@ -25,14 +25,13 @@ export async function remarkDirectiveUsingExample(
     .use(remarkIncludePreset)
     .process(await vFile.read(filePath));
 };
-
 ```
 
 Source files:
 
 main.md:
 
-```markdown file=fixtures/main.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 ::include{file=./included1.md}
@@ -44,26 +43,23 @@ After first file.
 After second file.
 
 _That_ should do it!
-
 ```
 
 included1.md:
 
-```markdown file=fixtures/included1.md
+```markdown
 Hello. I am the included1 file.
-
 ```
 
 included 2.md:
 
-```markdown file=fixtures/included\ 2.md
+```markdown
 Hello. I am the included2 file.
-
 ```
 
 Remark output:
 
-```markdown file=snapshots/output.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 Hello. I am the included1 file.
@@ -75,5 +71,4 @@ Hello. I am the included2 file.
 After second file.
 
 *That* should do it!
-
 ```

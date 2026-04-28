@@ -7,7 +7,7 @@ Source files:
 
 main.md:
 
-```markdown file=fixtures/main.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 ::include{file=./subfolder1/included.md}
@@ -17,7 +17,7 @@ _That_ should do it!
 
 included.md:
 
-````markdown file=fixtures/subfolder1/included.md
+````markdown
 Hello. I am the included. Test for code file path rebasing:
 
 ```typescript file=../../example.ts
@@ -61,7 +61,7 @@ import type { VFile } from 'vfile';
 
 Remark output:
 
-````markdown file=fixtures/output.md
+````markdown
 Hello. I am an main markdown file with `::include` directive.
 
 Hello. I am the included. Test for code file path rebasing:

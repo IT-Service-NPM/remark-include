@@ -138,7 +138,7 @@ npm install --save-dev @it-service-npm/remark-include
 
 Async plugin using example:
 
-```typescript file=test/examples/01/example.ts
+```typescript
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
 import { remarkIncludePreset } from '@it-service-npm/remark-include/async';
@@ -151,14 +151,13 @@ export async function remarkDirectiveUsingExample(
     .use(remarkIncludePreset)
     .process(await vFile.read(filePath));
 };
-
 ```
 
 Source files:
 
 main.md:
 
-```markdown file=test/examples/01/fixtures/main.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 ::include{file=./included1.md}
@@ -170,26 +169,23 @@ After first file.
 After second file.
 
 _That_ should do it!
-
 ```
 
 included1.md:
 
-```markdown file=test/examples/01/fixtures/included1.md
+```markdown
 Hello. I am the included1 file.
-
 ```
 
 included 2.md:
 
-```markdown file=test/examples/01/fixtures/included\ 2.md
+```markdown
 Hello. I am the included2 file.
-
 ```
 
 Remark output:
 
-```markdown file=test/examples/01/snapshots/output.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 Hello. I am the included1 file.
@@ -201,7 +197,6 @@ Hello. I am the included2 file.
 After second file.
 
 *That* should do it!
-
 ```
 
 ### Recursive transclusion
@@ -218,7 +213,7 @@ After second file.
 
 Sync plugin using example:
 
-```typescript file=test/examples/04/example.ts
+```typescript
 import { remark } from 'remark';
 import * as vFile from 'to-vfile';
 import { remarkIncludePreset } from '@it-service-npm/remark-include/sync';
@@ -231,42 +226,38 @@ export function remarkDirectiveUsingExample(
     .use(remarkIncludePreset)
     .processSync(vFile.readSync(filePath));
 };
-
 ```
 
 Source files:
 
 main.md:
 
-```markdown file=test/examples/04/fixtures/main.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 ::include{file=./included1.md}
 
 _That_ should do it!
-
 ```
 
 included1.md:
 
-```markdown file=test/examples/04/fixtures/included1.md
+```markdown
 Hello. I am the included1 file with `::include` directive
 for recursive transclusion example.
 
 ::include{file=./included2.md}
-
 ```
 
 included2.md:
 
-```markdown file=test/examples/04/fixtures/included2.md
+```markdown
 Hello. I am the included2 file.
-
 ```
 
 Remark output:
 
-```markdown file=test/examples/04/snapshots/output.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 Hello. I am the included1 file with `::include` directive
@@ -275,7 +266,6 @@ for recursive transclusion example.
 Hello. I am the included2 file.
 
 *That* should do it!
-
 ```
 
 ### Adjust the heading levels
@@ -286,7 +276,7 @@ Source files:
 
 main.md:
 
-```markdown file=test/examples/05/fixtures/main.md
+```markdown
 # Main file
 
 Hello. I am an main markdown file with `::include` directive.
@@ -296,12 +286,11 @@ Hello. I am an main markdown file with `::include` directive.
 ## H2 in main file
 
 End of main file.
-
 ```
 
 included1.md:
 
-```markdown file=test/examples/05/fixtures/included1.md
+```markdown
 # included1 file H1 (should be changed to H2 in output file)
 
 Hello. I am the included1.
@@ -313,21 +302,19 @@ Hello. I am the included1.
 ## in included1 file after included2 H2 (should be changed to H3 in output file)
 
 text text text.
-
 ```
 
 included2.md:
 
-```markdown file=test/examples/05/fixtures/included2.md
+```markdown
 # included2 file H1 (should be changed to H4 in output file)
 
 Hello. I am the included2.
-
 ```
 
 Remark output:
 
-```markdown file=test/examples/05/snapshots/output.md
+```markdown
 # Main file
 
 Hello. I am an main markdown file with `::include` directive.
@@ -349,7 +336,6 @@ text text text.
 ## H2 in main file
 
 End of main file.
-
 ```
 
 ### Include multiple files with glob
@@ -362,7 +348,7 @@ Source files:
 
 main.md:
 
-```markdown file=test/examples/08/fixtures/main.md
+```markdown
 # main file
 
 Hello. I am an main markdown file with `::include` directive.
@@ -370,39 +356,35 @@ Hello. I am an main markdown file with `::include` directive.
 ::include{file=./included*.md}
 
 _That_ should do it!
-
 ```
 
 included1.md:
 
-```markdown file=test/examples/08/fixtures/included1.md
+```markdown
 # included 1
 
 Hello. I am the included1.
-
 ```
 
 included2.md:
 
-```markdown file=test/examples/08/fixtures/included2.md
+```markdown
 # included 2
 
 Hello. I am the included2.
-
 ```
 
 included3.md:
 
-```markdown file=test/examples/08/fixtures/included3.md
+```markdown
 # included 3
 
 Hello. I am the included3.
-
 ```
 
 Remark output:
 
-```markdown file=test/examples/08/snapshots/output.md
+```markdown
 # main file
 
 Hello. I am an main markdown file with `::include` directive.
@@ -420,7 +402,6 @@ Hello. I am the included2.
 Hello. I am the included3.
 
 *That* should do it!
-
 ```
 
 ### Updating relative path for links, images
@@ -432,18 +413,17 @@ Source files:
 
 main.md:
 
-```markdown file=test/examples/10/fixtures/main.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 ::include{file=./subfolder1/included.md}
 
 _That_ should do it!
-
 ```
 
 included.md:
 
-```markdown file=test/examples/10/fixtures/subfolder1/included.md
+```markdown
 Hello. I am the included. Test image:
 
 ![Test local image](test-image.png)
@@ -451,12 +431,11 @@ Hello. I am the included. Test image:
 ![Test local image with space](test%20image.png)
 
 ![Test web image](https://img.shields.io/badge/github-repo-blue?logo=github)
-
 ```
 
 Remark output:
 
-```markdown file=test/examples/10/fixtures/output.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 Hello. I am the included. Test image:
@@ -468,7 +447,6 @@ Hello. I am the included. Test image:
 ![Test web image](https://img.shields.io/badge/github-repo-blue?logo=github)
 
 *That* should do it!
-
 ```
 
 ### Updating relative path for code files
@@ -480,18 +458,17 @@ Source files:
 
 main.md:
 
-```markdown file=test/examples/11/fixtures/main.md
+```markdown
 Hello. I am an main markdown file with `::include` directive.
 
 ::include{file=./subfolder1/included.md}
 
 _That_ should do it!
-
 ```
 
 included.md:
 
-````markdown file=test/examples/11/fixtures/subfolder1/included.md
+````markdown
 Hello. I am the included. Test for code file path rebasing:
 
 ```typescript file=../../example.ts
@@ -531,12 +508,11 @@ import remarkDirective from 'remark-directive';
 import { remarkInclude } from '@it-service-npm/remark-include';
 import type { VFile } from 'vfile';
 ```
-
 ````
 
 Remark output:
 
-````markdown file=test/examples/11/fixtures/output.md
+````markdown
 Hello. I am an main markdown file with `::include` directive.
 
 Hello. I am the included. Test for code file path rebasing:
@@ -580,7 +556,6 @@ import type { VFile } from 'vfile';
 ```
 
 *That* should do it!
-
 ````
 
 ## API
