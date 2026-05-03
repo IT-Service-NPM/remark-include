@@ -20,7 +20,8 @@ export default {
     remarkGithubAdmonitions,
     [remarkIncludeCode, {
       useEditorConfig: true,
-      trimFinalNewline: true
+      trimFinalNewline: true,
+      trimExtraIndent: true
     }],
     remarkIncludePreset,
     remarkToc,
