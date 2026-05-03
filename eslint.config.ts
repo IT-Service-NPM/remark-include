@@ -1,5 +1,4 @@
 import { defineConfig } from 'eslint/config';
-import { ESLint } from 'eslint';
 import ESLintJs from '@eslint/js';
 import ESLintPluginN from 'eslint-plugin-n';
 import ESLintPluginTSDoc from 'eslint-plugin-tsdoc';
@@ -92,7 +91,7 @@ export default defineConfig([
     plugins: {
       n: ESLintPluginN,
       '@stylistic': ESLintPluginStylistic,
-      tsdoc: (ESLintPluginTSDoc as ESLint.Plugin),
+      tsdoc: ESLintPluginTSDoc,
       prettier: ESLintPluginPrettier,
       unicorn: ESLintPluginUnicorn
     },
