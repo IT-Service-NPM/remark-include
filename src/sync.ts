@@ -18,7 +18,7 @@ import {
 import {
   getIncludeDirectives, getAttributes,
   assertFilesExists, assertFileDirnameIsDefined
-} from './library.js';
+} from './library.ts';
 
 /**
  * Sync Remark plugin fabric function.

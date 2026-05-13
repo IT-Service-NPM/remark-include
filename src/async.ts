@@ -19,7 +19,7 @@ import {
 import {
   getIncludeDirectives, getAttributes,
   assertFilesExists, assertFileDirnameIsDefined
-} from './library.js';
+} from './library.ts';
 
 /**
  * Async Remark plugin fabric function.

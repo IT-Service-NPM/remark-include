@@ -6,7 +6,8 @@
 	"compilerOptions": {
 		"composite": true,
 		"noEmit": false,
-		"allowImportingTsExtensions": false,
+		"allowImportingTsExtensions": true,
+		"rewriteRelativeImportExtensions": true,
 		"outDir": "./dist",
 		"rootDir": "./src"
 	}

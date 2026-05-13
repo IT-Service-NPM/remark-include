@@ -40,8 +40,8 @@
 export {
   remarkInclude as remarkIncludeSync,
   remarkIncludePreset as remarkIncludePresetSync
-} from './sync.js';
+} from './sync.ts';
 export {
   remarkInclude,
   remarkIncludePreset, remarkIncludePreset as default
-} from './async.js';
+} from './async.ts';
