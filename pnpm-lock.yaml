@@ -12,8 +12,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       '@it-service-npm/remark-heading-adjustment':
-        specifier: ^1.2.3
-        version: 1.2.3
+        specifier: ^1.2.4
+        version: 1.2.4
       '@it-service-npm/remark-relative-url-adjustment':
         specifier: ^1.1.1
         version: 1.1.1
@@ -483,8 +483,8 @@ packages:
     resolution: {integrity: sha512-FHE7pEc8pbHzImm4yVUrf2c1Jl3griJZTeh8WcYWYvED60I5nSoBhirYf/SRr+IMHJpECIIY2XWyX+LBXG3w6A==}
     engines: {node: '>=22.0'}
 
-  '@it-service-npm/remark-heading-adjustment@1.2.3':
-    resolution: {integrity: sha512-tnTRxi+FLquisQR/SoIoBjoP1Z/yHOeGD8p+CMk5IzNb4iSt5kEW+EN4YY8DxT+mDe32z5GYYymoLra2ofSTBw==}
+  '@it-service-npm/remark-heading-adjustment@1.2.4':
+    resolution: {integrity: sha512-2kNrNZKTtkSqIzuwHYxTIGZiNxib1tS5YpA548Oab8TbBJBY+wBv+uacJetlWOPt7p2xVqRm5v3A1RBH4fgzpw==}
     engines: {node: '>=22.17'}
 
   '@it-service-npm/remark-include-code@2.3.3':
@@ -2899,9 +2899,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@it-service-npm/remark-heading-adjustment@1.2.3':
+  '@it-service-npm/remark-heading-adjustment@1.2.4':
     dependencies:
       remark: 15.0.1
+      remark-directive: 4.0.0
       unist-util-visit: 5.1.0
     transitivePeerDependencies:
       - supports-color

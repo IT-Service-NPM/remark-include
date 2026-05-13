@@ -64,7 +64,7 @@
 	"packageManager": "pnpm@10.30.3",
 	"dependencies": {
 		"@it-service-npm/remark-code-path-adjustment": "^1.0.2",
-		"@it-service-npm/remark-heading-adjustment": "^1.2.3",
+		"@it-service-npm/remark-heading-adjustment": "^1.2.4",
 		"@it-service-npm/remark-relative-url-adjustment": "^1.1.1",
 		"remark-directive": "^4.0.0",
 		"to-vfile": "^8.0.0",
