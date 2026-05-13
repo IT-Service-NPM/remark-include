@@ -108,7 +108,7 @@ export function remarkInclude(
 /**
  * Preset of Remark plugins:
  *
- * - {@link remarkIncludeSync}
+ * - {@link remarkInclude}
  *
  * - {@link https://www.npmjs.com/package/remark-directive|remarkDirective}
  *
