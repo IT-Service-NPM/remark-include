@@ -1,6 +1,12 @@
 # Adjust the heading levels
 
-`@it-service-npm/remark-include` adjust the heading levels within the included content.
+`@it-service-npm/remark-include` adjusts the headings level within the included content.
+
+An imported markdown file will “inherit” the headings level.
+If the `::include{file=./included.md}` statement happens under Heading 2,
+for example, any Heading 1 in the included file
+will be “translated” to have header level 3
+(with [`@it-service-npm/remark-heading-adjustment`](https://www.npmjs.com/package/@it-service-npm/remark-heading-adjustment))
 
 Source files:
 

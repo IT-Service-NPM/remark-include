@@ -28,24 +28,24 @@ import {
  *
  * Additional features:
  *
- * - GitLab include directives inside the included file are ignored,
- *   but this plugin support recursive transclusion
+ * - GitLab `::include` directives are ignored inside the included file,
+ *   but this plugin supports recursive transclusion
  *
  * - It is possible to use globs (`::include{file="./included*.md"}`)
  *   in `file` attribute
  *
  * - Introduce a new attribute called `optional`.
  *   This attribute prevents fatal errors from occurring
- *   when the file or files specified by the `file` attribute do not exist
+ *   when the file (or files) specified by the `file` attribute does not exists
  *
  * - Relative images and links in the imported files will have their paths
  *   rewritten to be relative
  *   the original document rather than the imported file
  *   (with {@link https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment|`@it-service-npm/remark-relative-url-adjustment`})
  *
- * - An imported markdown file will "inherit" the heading levels.
+ * - An imported markdown file will "inherit" the headings level.
  *   If the `::include{file=./included.md}` statement happens under Heading 2,
- *   for example, any heading 1 in the included file
+ *   for example, any Heading 1 in the included file
  *   will be "translated" to have header level 3
  *   (with {@link https://www.npmjs.com/package/@it-service-npm/remark-heading-adjustment|`@it-service-npm/remark-heading-adjustment`})
  *

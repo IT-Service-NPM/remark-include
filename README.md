@@ -58,12 +58,13 @@ statements to compose markdown files together.
 
 Additional features:
 
-- GitLab include directives inside the included file are ignored,
-  but this plugin **support recursive transclusion**
+- GitLab `::include` directives are ignored inside the included file,
+  but this plugin **supports recursive transclusion**
 - It is possible to use globs (`::include{file=./included*.md}`)
   in `file` attribute
-- New attribute `optional`,
-  which disable fatal directive error when file does not exists
+- New attribute `optional`.
+  This attribute prevents fatal errors from occurring
+  when the file (or files) specified by the `file` attribute does not exists
 - Relative images and links in the imported files will have their paths rewritten
   to be relative the original document rather than the imported file
   (with [`@it-service-npm/remark-relative-url-adjustment`](https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment))
@@ -201,7 +202,7 @@ After second file.
 
 ### Recursive transclusion
 
-`@it-service-npm/remark-include` support recursive transclusion.
+`@it-service-npm/remark-include` supports recursive transclusion.
 
 > [!TIP]
 > This plugin has two named entry points:
@@ -270,7 +271,13 @@ Hello. I am the included2 file.
 
 ### Adjust the heading levels
 
-`@it-service-npm/remark-include` adjust the heading levels within the included content.
+`@it-service-npm/remark-include` adjusts the headings level within the included content.
+
+An imported markdown file will “inherit” the headings level.
+If the `::include{file=./included.md}` statement happens under Heading 2,
+for example, any Heading 1 in the included file
+will be “translated” to have header level 3
+(with [`@it-service-npm/remark-heading-adjustment`](https://www.npmjs.com/package/@it-service-npm/remark-heading-adjustment))
 
 Source files:
 
@@ -340,8 +347,8 @@ End of main file.
 
 ### Include multiple files with glob
 
-`@it-service-npm/remark-include` support
-[glob](https://www.npmjs.com/package/glob)
+`@it-service-npm/remark-include` supports
+[glob](https://nodejs.org/api/fs.html#fsglobpattern-options-callback)
 as `file` attribute value.
 
 Source files:

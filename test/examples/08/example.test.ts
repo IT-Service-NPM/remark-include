@@ -9,7 +9,7 @@ import {
 
 await describe('remark-include', async () => {
 
-  await it('support globs as file path in sync mode',
+  await it('supports globs as file path in sync mode',
     (t: TestContext) => {
       const _cwd = process.cwd();
       try {
@@ -33,7 +33,7 @@ await describe('remark-include', async () => {
     }
   );
 
-  await it('support globs as file path in async mode',
+  await it('supports globs as file path in async mode',
     async (t: TestContext) => {
       const _cwd = process.cwd();
       try {

@@ -4,7 +4,7 @@ import { remarkDirectiveUsingExample } from './example.ts';
 
 await describe('remark-include', async () => {
 
-  await it('must support include directive in included files',
+  await it('must supports include directive in included files',
     (t: TestContext) => {
       const _cwd = process.cwd();
       try {
