@@ -5,7 +5,6 @@ import type { Transformer, Preset, Processor } from 'unified';
 import type { Root, RootContent } from 'mdast';
 import remarkDirective from 'remark-directive';
 import type { VFile } from 'vfile';
-import { VFileMessage } from 'vfile-message';
 import { read } from 'to-vfile';
 import {
   remarkHeadingsAdjustment
@@ -18,7 +17,7 @@ import {
 } from '@it-service-npm/remark-code-path-adjustment';
 import {
   getIncludeDirectives, getAttributes,
-  assertFilesExists, assertFileDirnameIsDefined
+  assertFilesExists, assertFileDirnameIsDefined, assertErrorIsVFileMessage
 } from './library.ts';
 
 /**
@@ -97,9 +96,7 @@ export function remarkInclude(
         ));
         includedContent = _includedContent.flat();
       } catch (error) {
-        if (!((error instanceof VFileMessage) && (!error.fatal))) {
-          throw error;
-        }
+        assertErrorIsVFileMessage(error);
       }
       includeDirective.parent.children.splice(
         includeDirective.index, 1,
