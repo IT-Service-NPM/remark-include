@@ -13,6 +13,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.6](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.5...v6.0.6) (2026-05-13)
+
+
+### Bug Fixes
+
+* update remark-heading-adjustment ([b9e7368](https://github.com/IT-Service-NPM/remark-include/commit/b9e7368ea9e14c85103b8fe1e7711ddddb6afb63))
+
 ## [6.0.5](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.4...v6.0.5) (2026-04-11)
 
 ### Bug Fixes
