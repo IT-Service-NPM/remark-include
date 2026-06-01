@@ -10,7 +10,7 @@ charset = utf-8
 
 [*.{editorconfig,gitattributes,gitignore}]
 
-[*.yml]
+[*.{yml,yaml}]
 end_of_line = lf
 indent_style = space
 indent_size = 2
