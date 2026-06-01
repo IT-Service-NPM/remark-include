@@ -185,7 +185,6 @@ export function assertErrorIsVFileMessage(
  *
  * @internal
  */
-// eslint-disable-next-line max-statements
 export function getAttributes(
   file: VFile,
   node: LeafDirective
