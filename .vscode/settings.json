@@ -40,10 +40,10 @@
 			"parameters": [
 				"--import",
 				"tsx",
-				"--experimental-transform-types",
 				"--experimental-test-module-mocks",
 				"--experimental-test-coverage"
 			]
 		}
-	]
+	],
+	"gitflow.disableOnRepo": true
 }
