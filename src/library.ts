@@ -90,6 +90,61 @@ export function assertFilesExists(
 }
 
 /**
+ * Additional Remark processor data,
+ * used by this plugin
+ *
+ * @internal
+ */
+export interface IData {
+
+  /**
+   * Processed file paths.
+   * It is used to prevent recursive looping
+   *
+   * @internal
+   */
+  processedFilePaths: string[];
+
+}
+
+declare module 'unified' {
+  interface Data {
+    remarkIncludeData?: IData;
+  }
+}
+
+/**
+ * Send Remark error message when file from
+ * `::include` directive includes this file with `::include` directive
+ *
+ * @param file - Current markdown file
+ * @param node - `::include` directive Node
+ * @param attributes - `::include` directive attributes
+ * @param includedFilePath - file paths for including
+ * @param processorData - Remark processor additional data, used by this plugin
+ * @throws `VFileMessage` if file not found
+ *
+ * @internal
+ */
+export function assertFileDoNotIncludeThisFile(
+  file: VFile,
+  node: LeafDirective,
+  attributes: DirectiveAttributes,
+  includedFilePath: string,
+  processorData?: IData
+): void {
+  if (processorData?.processedFilePaths.includes(includedFilePath)) {
+    const filesList = [...processorData.processedFilePaths, includedFilePath]
+      .map((filePath) => `"${filePath}"`)
+      .join('\n\t-> ');
+    file.fail(
+      `unexpected recursive transclusion:\n\t${filesList}`,
+      node
+    );
+  }
+}
+
+/**
  * Test `file.dirname` expected
  *
  * @param file - current markdown file

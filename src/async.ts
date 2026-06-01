@@ -17,7 +17,8 @@ import {
 } from '@it-service-npm/remark-code-path-adjustment';
 import {
   getIncludeDirectives, getAttributes,
-  assertFilesExists, assertFileDirnameIsDefined, assertErrorIsVFileMessage
+  assertFileDirnameIsDefined, assertFilesExists,
+  assertFileDoNotIncludeThisFile, assertErrorIsVFileMessage
 } from './library.ts';
 
 /**
@@ -75,11 +76,16 @@ export function remarkInclude(
           attributes, includedFilesPaths
         );
         includedFilesPaths.sort();
+        const pluginData = processor.data('remarkIncludeData') ?? { processedFilePaths: [] };
+        pluginData.processedFilePaths.push(path.resolve(file.path));
 
         async function getFileAST(
           _includedFilePath: string
         ): Promise<RootContent[]> {
           const includedFilePath = path.resolve(fileDirname, _includedFilePath);
+          assertFileDoNotIncludeThisFile(file, includeDirective.node,
+            attributes, includedFilePath, pluginData
+          );
           const includedFile: VFile = await read(includedFilePath, 'utf8');
           const _includedAST = processor.parse(includedFile);
           const includedAST: Root = await processor()
@@ -88,6 +94,7 @@ export function remarkInclude(
               sourcePath: includedFile.path,
               destinationPath: file.path
             })
+            .data('remarkIncludeData', pluginData)
             .run(_includedAST, includedFile) as Root;
           return includedAST.children;
         }

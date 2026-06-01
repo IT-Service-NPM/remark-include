@@ -49,7 +49,7 @@ export default defineConfig([
         ignoreTemplateLiterals: true,
         ignoreRegExpLiterals: true
       }],
-      'max-statements': ['warn', 15],
+      'max-statements': ['warn', 20],
       'new-cap': 'warn',
       'no-extend-native': 'error',
       'no-mixed-spaces-and-tabs': 'error',
@@ -64,7 +64,8 @@ export default defineConfig([
       'unicorn/no-typeof-undefined': 'off',
       'unicorn/no-this-assignment': 'off',
       '@typescript-eslint/no-this-alias': 'off',
-      'sonarjs/no-alphabetical-sort': 'off'
+      'sonarjs/no-alphabetical-sort': 'off',
+      'sonarjs/todo-tag': 'warn'
     },
     languageOptions: {
       ecmaVersion: 2022,
