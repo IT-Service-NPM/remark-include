@@ -122,11 +122,11 @@ declare module 'unified' {
  * @param attributes - `::include` directive attributes
  * @param includedFilePath - file paths for including
  * @param processorData - Remark processor additional data, used by this plugin
- * @throws `VFileMessage` if file not found
+ * @throws `VFileMessage` if unexpected recursive transclusion occurs
  *
  * @internal
  */
-export function assertFileDoNotIncludeThisFile(
+export function assertNoRecursiveTransclusion(
   file: VFile,
   node: LeafDirective,
   attributes: DirectiveAttributes,

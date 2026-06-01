@@ -18,7 +18,7 @@ import {
 import {
   getIncludeDirectives, getAttributes,
   assertFileDirnameIsDefined, assertFilesExists,
-  assertFileDoNotIncludeThisFile, assertErrorIsVFileMessage
+  assertNoRecursiveTransclusion, assertErrorIsVFileMessage
 } from './library.ts';
 
 /**
@@ -83,7 +83,7 @@ export function remarkInclude(
           _includedFilePath: string
         ): Promise<RootContent[]> {
           const includedFilePath = path.resolve(fileDirname, _includedFilePath);
-          assertFileDoNotIncludeThisFile(file, includeDirective.node,
+          assertNoRecursiveTransclusion(file, includeDirective.node,
             attributes, includedFilePath, pluginData
           );
           const includedFile: VFile = await read(includedFilePath, 'utf8');
