@@ -15,17 +15,18 @@ All notable changes to this project will be documented in this file. See
 
 ## [6.0.7](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.6...v6.0.7) (2026-06-01)
 
-
 ### Bug Fixes
 
-* avoid recursive transclusion ([646055b](https://github.com/IT-Service-NPM/remark-include/commit/646055b3552441479126e07ce8f86e22ef3f72e3)), closes [#19](https://github.com/IT-Service-NPM/remark-include/issues/19)
+* avoid recursive transclusion
+  ([646055b](https://github.com/IT-Service-NPM/remark-include/commit/646055b3552441479126e07ce8f86e22ef3f72e3)),
+  closes [#19](https://github.com/IT-Service-NPM/remark-include/issues/19)
 
 ## [6.0.6](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.5...v6.0.6) (2026-05-13)
 
-
 ### Bug Fixes
 
-* update remark-heading-adjustment ([b9e7368](https://github.com/IT-Service-NPM/remark-include/commit/b9e7368ea9e14c85103b8fe1e7711ddddb6afb63))
+* update remark-heading-adjustment
+  ([b9e7368](https://github.com/IT-Service-NPM/remark-include/commit/b9e7368ea9e14c85103b8fe1e7711ddddb6afb63))
 
 ## [6.0.5](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.4...v6.0.5) (2026-04-11)
 
