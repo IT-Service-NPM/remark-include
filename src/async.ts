@@ -70,7 +70,7 @@ export function remarkInclude(
         const attributes = getAttributes(file, includeDirective.node);
         const includedFilesPaths = (await Array.fromAsync<string>(glob(
           attributes.file,
-          { cwd: path.resolve(file.dirname) }
+          { cwd: fileDirname }
         )));
         assertFilesExists(file, includeDirective.node,
           attributes, includedFilesPaths

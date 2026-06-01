@@ -69,7 +69,7 @@ export function remarkInclude(
         const attributes = getAttributes(file, includeDirective.node);
         const includedFilesPaths = globSync(
           attributes.file,
-          { cwd: path.resolve(file.dirname) }
+          { cwd: fileDirname }
         ).toSorted();
         assertFilesExists(file, includeDirective.node,
           attributes, includedFilesPaths
