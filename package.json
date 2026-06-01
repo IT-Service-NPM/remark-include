@@ -61,7 +61,7 @@
 		"build:readme": "pnpm run build:readme:examples && pnpm run build:readme:main",
 		"build:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
 	},
-	"packageManager": "pnpm@10.30.3",
+	"packageManager": "pnpm@11.5.0",
 	"dependencies": {
 		"@it-service-npm/remark-code-path-adjustment": "^1.0.2",
 		"@it-service-npm/remark-heading-adjustment": "^1.2.4",
