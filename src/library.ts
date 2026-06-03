@@ -1,7 +1,7 @@
 import type { Nodes, Root, Parent } from 'mdast';
 import type { LeafDirective } from 'mdast-util-directive';
 import type { VFile } from 'vfile';
-import { VFileMessage } from 'vfile-message';
+import { VFileMessage, type Options as VFileMessageOptions } from 'vfile-message';
 import { visit } from 'unist-util-visit';
 
 export interface DirectiveAttributes {
@@ -75,17 +75,18 @@ export function assertFilesExists(
   paths: string[]
 ): asserts paths is NonEmptyArray<string> {
   if (paths.length === 0) {
+    const errorMessage = `file(s) "${attributes.file}" not found`;
+    const errorOptions: VFileMessageOptions = {
+      place: node.position,
+      ancestors: [node],
+      source: '@it-service-npm/remark-include',
+      ruleId: 'no-empty-file-list'
+    };
     if (attributes.optional) {
-      throw file.info(
-        `file(s) "${attributes.file}" not found`,
-        node
-      );
+      throw file.info(errorMessage, errorOptions);
     } else {
-      file.fail(
-        `file(s) "${attributes.file}" not found`,
-        node
-      );
-    }
+      file.fail(errorMessage, errorOptions);
+    };
   }
 }
 
@@ -137,10 +138,12 @@ export function assertNoRecursiveTransclusion(
     const filesList = [...processorData.processedFilePaths, includedFilePath]
       .map((filePath) => `"${filePath}"`)
       .join('\n\t-> ');
-    file.fail(
-      `unexpected recursive transclusion:\n\t${filesList}`,
-      node
-    );
+    file.fail(`unexpected recursive transclusion:\n\t${filesList}`, {
+      place: node.position,
+      ancestors: [node],
+      source: '@it-service-npm/remark-include',
+      ruleId: 'no-recursive-transclusion'
+    });
   }
 }
 
@@ -157,7 +160,10 @@ export function assertFileDirnameIsDefined(
 ): asserts file is VFile & { get dirname(): string } {
   if (typeof file.dirname === 'undefined') {
     file.fail(
-      '::include, unexpected error: "file" should be an instance of VFile with specified path'
+      '::include, unexpected error: "file" should be an instance of VFile with specified path', {
+      source: '@it-service-npm/remark-include',
+      ruleId: 'file-must-be-placed-in-file-system'
+    }
     );
   }
 }
@@ -199,10 +205,12 @@ export function getAttributes(
     (typeof node.attributes?.file === 'string') &&
     (node.attributes.file.length > 0)
   )) {
-    file.fail(
-      '::include, `file` attribute expected',
-      node
-    );
+    file.fail('::include, `file` attribute expected', {
+      place: node.position,
+      ancestors: [node],
+      source: '@it-service-npm/remark-include',
+      ruleId: 'file-attribute-expected'
+    });
   }
   attributes.file = node.attributes.file;
 
@@ -217,10 +225,12 @@ export function getAttributes(
         break;
       }
       default: {
-        file.fail(
-          `::include, \`optional\` attribute invalid value "${node.attributes.optional}"`,
-          node
-        );
+        file.fail(`::include, \`optional\` attribute invalid value "${node.attributes.optional}"`, {
+          place: node.position,
+          ancestors: [node],
+          source: '@it-service-npm/remark-include',
+          ruleId: 'no-attribute-invalid-value'
+        });
       }
     };
   }
@@ -231,10 +241,12 @@ export function getAttributes(
     const attributeList = unexpectedAttributes
       .map((s) => `\`${s}\``)
       .join(', ');
-    file.fail(
-      `::include, unknown attribute(s): ${attributeList}`,
-      node
-    );
+    file.fail(`::include, unknown attribute(s): ${attributeList}`, {
+      place: node.position,
+      ancestors: [node],
+      source: '@it-service-npm/remark-include',
+      ruleId: 'no-unknown-attributes'
+    });
   }
 
   return attributes;
