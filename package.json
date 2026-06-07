@@ -23,7 +23,11 @@
 	},
 	"license": "MIT",
 	"engines": {
-		"node": ">=24"
+		"runtime": {
+			"name": "node",
+			"version": ">=24",
+			"onFail": "download"
+		}
 	},
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",

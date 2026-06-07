@@ -1,6 +1,6 @@
 allowBuilds:
-  esbuild:  true
+  esbuild: true
 minimumReleaseAgeExclude:
   - "@it-service-npm/*"
-
-no-git-checks: true
+runtimeOnFail: download
+gitChecks: false
