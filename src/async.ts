@@ -14,11 +14,12 @@ import {
 import {
   remarkRelativeCodePathsAdjustment
 } from '@it-service-npm/remark-code-path-adjustment';
+import { getIncludeDirectives } from './lib/functions.ts';
+import { getAttributes } from './lib/options.ts';
 import {
-  getIncludeDirectives, getAttributes,
   assertFileDirnameIsDefined, assertFilesExists,
   assertNoRecursiveTransclusion, assertErrorIsVFileMessage
-} from './library.ts';
+} from './lib/asserts.ts';
 
 /**
  * Async Remark plugin fabric function.

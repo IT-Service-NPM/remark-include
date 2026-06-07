@@ -1,0 +1,54 @@
+import type { Nodes, Root, Parent } from 'mdast';
+import type { LeafDirective } from 'mdast-util-directive';
+import type { VFile } from 'vfile';
+import { visit } from 'unist-util-visit';
+
+export interface DirectiveAttributes {
+  file: string;
+  optional: boolean;
+}
+
+export interface DirectiveInfo {
+  node: LeafDirective,
+  index: number,
+  parent: Parent,
+  depth: number
+}
+
+/**
+ * Collect `::include` directives for processing
+ *
+ * @param tree - Source AST
+ * @param _file - Source markdown file
+ * @returns Directives for later processing
+ *
+ * @internal
+ */
+export function getIncludeDirectives(
+  tree: Root, _file: VFile
+): DirectiveInfo[] {
+
+  let depth = 0;
+  const includeDirectives: DirectiveInfo[] = [];
+
+  visit(
+    tree,
+    function (node: Nodes, index?: number, parent?: Parent): void {
+      if (node.type === 'heading') {
+        depth = node.depth;
+      } else if (
+        (node.type === 'leafDirective') &&
+        (node.name === 'include')
+      ) {
+        includeDirectives.unshift({
+          node: node,
+          index: index!,
+          parent: parent!,
+          depth: depth
+        });
+      }
+    }
+  );
+
+  return includeDirectives;
+}
