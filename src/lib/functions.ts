@@ -2,6 +2,7 @@ import type { Nodes, Root, Parent } from 'mdast';
 import type { LeafDirective } from 'mdast-util-directive';
 import type { VFile } from 'vfile';
 import { visit } from 'unist-util-visit';
+import { VFileMessage } from 'vfile-message';
 
 export interface DirectiveAttributes {
   file: string;
@@ -51,4 +52,40 @@ export function getIncludeDirectives(
   );
 
   return includeDirectives;
+}
+
+/**
+ * Wrap recursive Remark processor calls error
+ *
+ * @param file - Current markdown file
+ * @param node - `::include` directive Node
+ * @param error - errors, produced by recursive Remark processor calls
+ * @param includedFilePath - file paths for including
+ * @param processorData - Remark processor additional data, used by this plugin
+ * @throws `VFileMessage` if unexpected recursive transclusion occurs
+ *
+ * @internal
+ */
+export function wrapRecursiveProcessorCallsErrors(
+  file: VFile,
+  node: LeafDirective,
+  error: any
+): never {
+  if (error instanceof VFileMessage) {
+    file.fail(error.message, {
+      place: node.position,
+      ancestors: [node],
+      source: error.source,
+      ruleId: error.ruleId,
+      cause: error
+    });
+  } else {
+    file.fail('unknown error, produced in recursive processor call', {
+      place: node.position,
+      ancestors: [node],
+      source: '@it-service-npm/remark-include',
+      ruleId: 'unknown-processor-call-error',
+      cause: error as Error
+    });
+  }
 }

@@ -14,7 +14,7 @@ import {
 import {
   remarkRelativeCodePathsAdjustment
 } from '@it-service-npm/remark-code-path-adjustment';
-import { getIncludeDirectives } from './lib/functions.ts';
+import { getIncludeDirectives, wrapRecursiveProcessorCallsErrors } from './lib/functions.ts';
 import { getAttributes } from './lib/options.ts';
 import {
   assertFileDirnameIsDefined, assertFilesExists,
@@ -88,15 +88,21 @@ export function remarkInclude(
           );
           const includedFile: VFile = await read(includedFilePath, 'utf8');
           const _includedAST = processor.parse(includedFile);
-          const includedAST: Root = await processor()
-            .data('topHeadingDepth', includeDirective.depth + 1)
-            .data('filePathChanges', {
-              sourcePath: includedFile.path,
-              destinationPath: file.path
-            })
-            .data('remarkIncludeData', pluginData)
-            .run(_includedAST, includedFile) as Root;
-          return includedAST.children;
+          try {
+            const includedAST: Root = await processor()
+              .data('topHeadingDepth', includeDirective.depth + 1)
+              .data('filePathChanges', {
+                sourcePath: includedFile.path,
+                destinationPath: file.path
+              })
+              .data('remarkIncludeData', pluginData)
+              .run(_includedAST, includedFile) as Root;
+            return includedAST.children;
+          } catch (error) {
+            wrapRecursiveProcessorCallsErrors(
+              file, includeDirective.node, error
+            );
+          }
         }
         const _includedContent: RootContent[][] = (await Promise.all(
           includedFilesPaths.map((filePath: string) => getFileAST(filePath))

@@ -1,4 +1,5 @@
 Hello. I am an "included 1" markdown file.
+Second line.
 
 ::include{file=./included2.md}
 
