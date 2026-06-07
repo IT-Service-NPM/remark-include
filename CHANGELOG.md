@@ -13,6 +13,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.8](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.7...v6.0.8) (2026-06-07)
+
+
+### Bug Fixes
+
+* fix error position in recursive calls ([78622c9](https://github.com/IT-Service-NPM/remark-include/commit/78622c9f13ff8b0a10741ce5be367e1f77e2859c)), closes [#19](https://github.com/IT-Service-NPM/remark-include/issues/19)
+
 ## [6.0.7](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.6...v6.0.7) (2026-06-01)
 
 ### Bug Fixes
