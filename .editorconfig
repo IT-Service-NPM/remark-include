@@ -8,7 +8,7 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 charset = utf-8
 
-[*.{editorconfig,gitattributes,gitignore,npmignore}]
+[*.{editorconfig,gitattributes,gitignore,npmignore,npmrc}]
 
 [*.{yml,yaml}]
 end_of_line = lf
