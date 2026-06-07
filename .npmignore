@@ -1,0 +1,5 @@
+*.mdp
+src
+test
+coverage
+temp

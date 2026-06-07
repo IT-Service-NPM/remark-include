@@ -45,6 +45,7 @@
 		"markdownlint",
 		"nodenext",
 		"nodir",
+		"npmignore",
 		"PACKAGEJSON",
 		"qrcode",
 		"relateurl",
