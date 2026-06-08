@@ -13,6 +13,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.10](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.9...v6.0.10) (2026-06-08)
+
+
+### Bug Fixes
+
+* add api.md to package ([f8fb720](https://github.com/IT-Service-NPM/remark-include/commit/f8fb72022d4dcd4bc17e150960a342a3a8881b4f))
+
 ## [6.0.9](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.8...v6.0.9) (2026-06-08)
 
 
