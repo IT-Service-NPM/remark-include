@@ -124,6 +124,8 @@ npm install --save-dev @it-service-npm/remark-include
 
 Please, read the [API reference](/docs/index.md).
 
+::include{file=api/*.api.md}
+
 ## License
 
 [MIT](LICENSE) © [Sergei S. Betke](https://github.com/sergey-s-betke)
