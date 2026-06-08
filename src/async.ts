@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { glob } from 'node:fs/promises';
-import type { Transformer, Preset, Processor } from 'unified';
+import type { Transformer, Preset, Processor, Plugin } from 'unified';
 import type { Root, RootContent } from 'mdast';
 import remarkDirective from 'remark-directive';
 import type { VFile } from 'vfile';
@@ -53,7 +53,7 @@ import {
  *
  * @public
  */
-export function remarkInclude(
+export const remarkInclude: Plugin<[], Root> = function remarkInclude(
   this: Processor
 ): Transformer<Root> {
 

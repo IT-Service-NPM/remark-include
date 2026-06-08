@@ -20,11 +20,11 @@ Additional features:
 
 This plugin is a modern fork of [remark-import](https://github.com/BrekiTomasson/remark-import) and [remark-include](https://github.com/Qard/remark-include)<!-- -->, compatible with Remark v15.
 
-## Functions
+## Variables
 
 <table><thead><tr><th>
 
-Function
+Variable
 
 
 </th><th>
@@ -35,7 +35,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[remarkInclude(this)](./remark-include.remarkinclude.md)
+[remarkInclude](./remark-include.remarkinclude.md)
 
 
 </td><td>
@@ -60,46 +60,6 @@ Additional features:
 </td></tr>
 <tr><td>
 
-[remarkIncludeSync(this)](./remark-include.remarkincludesync.md)
-
-
-</td><td>
-
-Sync Remark plugin fabric function.
-
-With this plugin, you can use `::include{file=./included.md}` [GitLab transclusion syntax](https://docs.gitlab.com/user/markdown/#includes) statements to compose markdown files together.
-
-Additional features:
-
-- GitLab `::include` directives are ignored inside the included file, but this plugin supports recursive transclusion
-
-- It is possible to use globs (`::include{file="./included*.md"}`<!-- -->) in `file` attribute
-
-- Introduce a new attribute called `optional`<!-- -->. This attribute prevents fatal errors from occurring when the file (or files) specified by the `file` attribute does not exists
-
-- Relative images and links in the imported files will have their paths rewritten to be relative the original document rather than the imported file (with [\`@it-service-npm/remark-relative-url-adjustment\`](https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment)<!-- -->)
-
-- An imported markdown file will "inherit" the headings level. If the `::include{file=./included.md}` statement happens under Heading 2, for example, any Heading 1 in the included file will be "translated" to have header level 3 (with [\`@it-service-npm/remark-heading-adjustment\`](https://www.npmjs.com/package/@it-service-npm/remark-heading-adjustment)<!-- -->)
-
-
-</td></tr>
-</tbody></table>
-
-## Variables
-
-<table><thead><tr><th>
-
-Variable
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
 [remarkIncludePreset](./remark-include.remarkincludepreset.md)
 
 
@@ -107,7 +67,7 @@ Description
 
 Preset of Remark plugins:
 
-- [remarkInclude()](./remark-include.remarkinclude.md)
+- [remarkInclude](./remark-include.remarkinclude.md)
 
 - [remarkDirective](https://www.npmjs.com/package/remark-directive)
 
@@ -128,7 +88,7 @@ Preset of Remark plugins:
 
 Preset of Remark plugins:
 
-- [remarkInclude()](./remark-include.remarkinclude.md)
+- [remarkInclude](./remark-include.remarkinclude.md)
 
 - [remarkDirective](https://www.npmjs.com/package/remark-directive)
 
@@ -137,6 +97,31 @@ Preset of Remark plugins:
 - [remarkRelativeUrlsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment)
 
 - [remarkRelativeCodePathsAdjustment](https://www.npmjs.com/package/@it-service-npm/remark-code-path-adjustment)
+
+
+</td></tr>
+<tr><td>
+
+[remarkIncludeSync](./remark-include.remarkincludesync.md)
+
+
+</td><td>
+
+Sync Remark plugin fabric function.
+
+With this plugin, you can use `::include{file=./included.md}` [GitLab transclusion syntax](https://docs.gitlab.com/user/markdown/#includes) statements to compose markdown files together.
+
+Additional features:
+
+- GitLab `::include` directives are ignored inside the included file, but this plugin supports recursive transclusion
+
+- It is possible to use globs (`::include{file="./included*.md"}`<!-- -->) in `file` attribute
+
+- Introduce a new attribute called `optional`<!-- -->. This attribute prevents fatal errors from occurring when the file (or files) specified by the `file` attribute does not exists
+
+- Relative images and links in the imported files will have their paths rewritten to be relative the original document rather than the imported file (with [\`@it-service-npm/remark-relative-url-adjustment\`](https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment)<!-- -->)
+
+- An imported markdown file will "inherit" the headings level. If the `::include{file=./included.md}` statement happens under Heading 2, for example, any Heading 1 in the included file will be "translated" to have header level 3 (with [\`@it-service-npm/remark-heading-adjustment\`](https://www.npmjs.com/package/@it-service-npm/remark-heading-adjustment)<!-- -->)
 
 
 </td></tr>

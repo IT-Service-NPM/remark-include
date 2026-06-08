@@ -4,13 +4,12 @@
 
 ```ts
 
+import type { Plugin } from 'unified';
 import type { Preset } from 'unified';
-import type { Processor } from 'unified';
 import type { Root } from 'mdast';
-import type { Transformer } from 'unified';
 
 // @public
-export function remarkInclude(this: Processor): Transformer<Root>;
+export const remarkInclude: Plugin<[], Root>;
 
 // @public
 const remarkIncludePreset: Preset;
@@ -21,6 +20,6 @@ export { remarkIncludePreset }
 export const remarkIncludePresetSync: Preset;
 
 // @public
-export function remarkIncludeSync(this: Processor): Transformer<Root>;
+export const remarkIncludeSync: Plugin<[], Root>;
 
 ```
