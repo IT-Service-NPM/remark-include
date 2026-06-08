@@ -13,6 +13,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.9](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.8...v6.0.9) (2026-06-08)
+
+
+### Bug Fixes
+
+* remove readme.mdp from package ([3aa82e3](https://github.com/IT-Service-NPM/remark-include/commit/3aa82e32cd28ba278fbf35549bdd02e5ef6c9dc5))
+
 ## [6.0.8](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.7...v6.0.8) (2026-06-07)
 
 ### Bug Fixes
