@@ -2,7 +2,6 @@
 
 [![GitHub release][github-release]][github-release-url]
 [![NPM release][npm]][npm-url]
-[![Node version][node]][node-url]
 [![Dependencies status][deps]][deps-url]
 [![Install size][size]][size-url]
 
@@ -27,10 +26,6 @@
 [npm]: https://img.shields.io/npm/v/@it-service-npm/remark-include.svg?logo=npm
 
 [npm-url]: https://www.npmjs.com/package/@it-service-npm/remark-include
-
-[node]: https://img.shields.io/node/v/@it-service-npm/remark-include.svg
-
-[node-url]: https://nodejs.org
 
 [deps]: https://img.shields.io/librariesio/release/npm/@it-service-npm/remark-include
 
