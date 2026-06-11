@@ -1,4 +1,4 @@
-Hello. I am an main markdown file with an unexpected recursive directive `::include`.
+Hello. I am a main markdown file with an unexpected recursive directive `::include`.
 One.
 Two.
 Three.

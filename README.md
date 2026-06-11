@@ -59,9 +59,9 @@ Additional features:
   in `file` attribute
 - New attribute `optional`.
   This attribute prevents fatal errors from occurring
-  when the file (or files) specified by the `file` attribute does not exists
+  when the file (or files) specified by the `file` attribute does not exist
 - Relative images and links in the imported files will have their paths rewritten
-  to be relative the original document rather than the imported file
+  to be relative to the original document rather than the imported file
   (with [`@it-service-npm/remark-relative-url-adjustment`](https://www.npmjs.com/package/@it-service-npm/remark-relative-url-adjustment))
 - An imported markdown file will “inherit” the heading levels.
   If the `::include{file=./included.md}` statement happens under Heading 2,
@@ -410,7 +410,7 @@ Hello. I am the included3.
 ### Updating relative path for links, images
 
 Relative images and links in the imported files will have their paths rewritten
-to be relative the original document rather than the imported file.
+to be relative to the original document rather than the imported file.
 
 Source files:
 
@@ -455,7 +455,7 @@ Hello. I am the included. Test image:
 ### Updating relative path for code files
 
 Relative images and links in the imported files will have their paths rewritten
-to be relative the original document rather than the imported file.
+to be relative to the original document rather than the imported file.
 
 Source files:
 

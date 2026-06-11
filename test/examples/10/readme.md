@@ -1,7 +1,7 @@
 # Updating relative path for links, images
 
 Relative images and links in the imported files will have their paths rewritten
-to be relative the original document rather than the imported file.
+to be relative to the original document rather than the imported file.
 
 Source files:
 
