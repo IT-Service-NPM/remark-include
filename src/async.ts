@@ -17,8 +17,8 @@ import {
 import { getIncludeDirectives, wrapRecursiveProcessorCallsErrors } from './lib/functions.ts';
 import { getAttributes } from './lib/options.ts';
 import {
-  assertFileDirnameIsDefined, assertFilesExists,
-  assertNoRecursiveTransclusion, assertErrorIsVFileMessage
+  assertFileDirnameIsDefined, assertFilesExistsOrOptional,
+  assertNoRecursiveTransclusion
 } from './lib/asserts.ts';
 
 /**
@@ -65,55 +65,50 @@ export const remarkInclude: Plugin<[], Root> = function remarkInclude(
     assertFileDirnameIsDefined(file);
     const fileDirname = path.resolve(file.dirname);
     for (const includeDirective of includeDirectives) {
-      let includedContent: RootContent[] = [];
-      try {
-        const attributes = getAttributes(file, includeDirective.node);
-        const includedFilesPaths = (await Array.fromAsync<string>(glob(
-          attributes.file,
-          { cwd: fileDirname }
-        )));
-        assertFilesExists(file, includeDirective.node,
-          attributes, includedFilesPaths
-        );
-        includedFilesPaths.sort();
-        const pluginData = processor.data('remarkIncludeData') ?? { processedFilePaths: [] };
-        pluginData.processedFilePaths.push(path.resolve(file.path));
+      const attributes = getAttributes(file, includeDirective.node);
+      const includedFilesPaths = (await Array.fromAsync<string>(glob(
+        attributes.file,
+        { cwd: fileDirname }
+      )));
+      includedFilesPaths.sort();
+      assertFilesExistsOrOptional(file, includeDirective.node,
+        attributes, includedFilesPaths
+      );
+      const pluginData = processor.data('remarkIncludeData') ?? { processedFilePaths: [] };
+      pluginData.processedFilePaths.push(path.resolve(file.path));
 
-        async function getFileAST(
-          _includedFilePath: string
-        ): Promise<RootContent[]> {
-          const includedFilePath = path.resolve(fileDirname, _includedFilePath);
-          assertNoRecursiveTransclusion(file, includeDirective.node,
-            attributes, includedFilePath, pluginData
+      async function getFileAST(
+        _includedFilePath: string
+      ): Promise<RootContent[]> {
+        const includedFilePath = path.resolve(fileDirname, _includedFilePath);
+        assertNoRecursiveTransclusion(file, includeDirective.node,
+          attributes, includedFilePath, pluginData
+        );
+        const includedFile: VFile = await read(includedFilePath, 'utf8');
+        const _includedAST = processor.parse(includedFile);
+        try {
+          const includedAST: Root = await processor()
+            .data('topHeadingDepth', includeDirective.depth + 1)
+            .data('filePathChanges', {
+              sourcePath: includedFile.path,
+              destinationPath: file.path
+            })
+            .data('remarkIncludeData', pluginData)
+            .run(_includedAST, includedFile) as Root;
+          return includedAST.children;
+        } catch (error) {
+          wrapRecursiveProcessorCallsErrors(
+            file, includeDirective.node, error
           );
-          const includedFile: VFile = await read(includedFilePath, 'utf8');
-          const _includedAST = processor.parse(includedFile);
-          try {
-            const includedAST: Root = await processor()
-              .data('topHeadingDepth', includeDirective.depth + 1)
-              .data('filePathChanges', {
-                sourcePath: includedFile.path,
-                destinationPath: file.path
-              })
-              .data('remarkIncludeData', pluginData)
-              .run(_includedAST, includedFile) as Root;
-            return includedAST.children;
-          } catch (error) {
-            wrapRecursiveProcessorCallsErrors(
-              file, includeDirective.node, error
-            );
-          }
         }
-        const _includedContent: RootContent[][] = (await Promise.all(
-          includedFilesPaths.map((filePath: string) => getFileAST(filePath))
-        ));
-        includedContent = _includedContent.flat();
-      } catch (error) {
-        assertErrorIsVFileMessage(error);
       }
+      const _includedContent: RootContent[][] = await Promise.all(
+        includedFilesPaths.map(getFileAST)
+      );
+      const includedContent = _includedContent.flat();
+
       includeDirective.parent.children.splice(
-        includeDirective.index, 1,
-        ...includedContent
+        includeDirective.index, 1, ...includedContent
       );
     }
     return tree;

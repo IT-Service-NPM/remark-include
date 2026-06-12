@@ -1,6 +1,6 @@
 import type { LeafDirective } from 'mdast-util-directive';
 import type { VFile } from 'vfile';
-import { VFileMessage, type Options as VFileMessageOptions } from 'vfile-message';
+import { type Options as VFileMessageOptions } from 'vfile-message';
 import type { IData } from './types.ts';
 
 export interface DirectiveAttributes {
@@ -22,7 +22,7 @@ type NonEmptyArray<T> = [T, ...T[]];
  *
  * @internal
  */
-export function assertFilesExists(
+export function assertFilesExistsOrOptional(
   file: VFile,
   node: LeafDirective,
   attributes: DirectiveAttributes,
@@ -37,7 +37,7 @@ export function assertFilesExists(
       ruleId: 'no-empty-file-list'
     };
     if (attributes.optional) {
-      throw file.info(errorMessage, errorOptions);
+      file.info(errorMessage, errorOptions);
     } else {
       file.fail(errorMessage, errorOptions);
     };
@@ -95,18 +95,5 @@ export function assertFileDirnameIsDefined(
       ruleId: 'file-must-be-placed-in-file-system'
     }
     );
-  }
-}
-
-/**
- * Catch non fatal VFileMessage
- *
- * @internal
- */
-export function assertErrorIsVFileMessage(
-  error: any
-): asserts error is VFileMessage & { fatal: false } {
-  if (!((error instanceof VFileMessage) && (!error.fatal))) {
-    throw error;
   }
 }
