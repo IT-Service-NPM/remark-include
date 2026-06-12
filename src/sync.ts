@@ -71,7 +71,7 @@ export const remarkInclude: Plugin<[], Root> = function remarkInclude(
         const includedFilesPaths = globSync(
           attributes.file,
           { cwd: fileDirname }
-        ).toSorted();
+        ).sort();
         assertFilesExists(file, includeDirective.node,
           attributes, includedFilesPaths
         );

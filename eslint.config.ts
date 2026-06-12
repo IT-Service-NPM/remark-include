@@ -105,7 +105,8 @@ export default defineConfig([
       }],
       'n/no-missing-import': ['error', {
         'ignoreTypeImport': true
-      }]
+      }],
+      'unicorn/no-array-sort': 'off'
     },
   },
   {
