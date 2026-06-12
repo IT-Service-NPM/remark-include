@@ -15,21 +15,15 @@ All notable changes to this project will be documented in this file. See
 
 ## [6.0.11](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.10...v6.0.11) (2026-06-12)
 
-
-### Bug Fixes
-
-* don't throw if optional file not found ([b0f259f](https://github.com/IT-Service-NPM/remark-include/commit/b0f259fbd36baf65c8ab7a97a99c9a4d59b16bc7))
+* don't using exception throwing if optional file not found
+  ([b0f259f](https://github.com/IT-Service-NPM/remark-include/commit/b0f259fbd36baf65c8ab7a97a99c9a4d59b16bc7))
 
 ## [6.0.10](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.9...v6.0.10) (2026-06-08)
-
-### Bug Fixes
 
 * add api.md to package
   ([f8fb720](https://github.com/IT-Service-NPM/remark-include/commit/f8fb72022d4dcd4bc17e150960a342a3a8881b4f))
 
 ## [6.0.9](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.8...v6.0.9) (2026-06-08)
-
-### Bug Fixes
 
 * remove readme.mdp from package
   ([3aa82e3](https://github.com/IT-Service-NPM/remark-include/commit/3aa82e32cd28ba278fbf35549bdd02e5ef6c9dc5))
@@ -41,8 +35,6 @@ All notable changes to this project will be documented in this file. See
 * fix error position in recursive calls
   ([78622c9](https://github.com/IT-Service-NPM/remark-include/commit/78622c9f13ff8b0a10741ce5be367e1f77e2859c)),
   closes [#19](https://github.com/IT-Service-NPM/remark-include/issues/19)
-* remove readme.mdp from package
-  ([dfa8d9f](https://github.com/IT-Service-NPM/remark-include/commit/dfa8d9f315f95938591ece4b10a073f431af3a0d))
 
 ## [6.0.7](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.6...v6.0.7) (2026-06-01)
 
@@ -56,7 +48,7 @@ All notable changes to this project will be documented in this file. See
 
 ### Bug Fixes
 
-* update remark-heading-adjustment
+* update '@it-service-npm/remark-heading-adjustment'
   ([b9e7368](https://github.com/IT-Service-NPM/remark-include/commit/b9e7368ea9e14c85103b8fe1e7711ddddb6afb63))
 
 ## [6.0.5](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.4...v6.0.5) (2026-04-11)
