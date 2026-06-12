@@ -13,6 +13,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.11](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.10...v6.0.11) (2026-06-12)
+
+
+### Bug Fixes
+
+* don't throw if optional file not found ([b0f259f](https://github.com/IT-Service-NPM/remark-include/commit/b0f259fbd36baf65c8ab7a97a99c9a4d59b16bc7))
+
 ## [6.0.10](https://github.com/IT-Service-NPM/remark-include/compare/v6.0.9...v6.0.10) (2026-06-08)
 
 ### Bug Fixes
