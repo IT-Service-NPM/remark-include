@@ -42,7 +42,7 @@ export function assertFilesExistsOrOptional(
     file.info(errorMessage, errorOptions);
   } else {
     file.fail(errorMessage, errorOptions);
-  };
+  }
 }
 
 /**
