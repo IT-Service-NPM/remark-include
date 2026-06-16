@@ -107,18 +107,21 @@ export default defineConfig([
         'ignoreTypeImport': true
       }],
       'unicorn/no-array-sort': 'off',
-      'unicorn/no-array-callback-reference': 'off'
+      'unicorn/require-array-sort-compare': 'off',
+      'unicorn/no-array-callback-reference': 'off',
+      'unicorn/no-this-outside-of-class': 'off'
     },
   },
   {
-    files: ['test/**/*.test.ts'],
+    files: ['test/**/*.ts'],
     plugins: {
       n: ESLintPluginN,
       '@stylistic': ESLintPluginStylistic,
       prettier: ESLintPluginPrettier
     },
     rules: {
-      'max-statements': 'off'
+      'max-statements': 'off',
+      'unicorn/filename-case': 'off'
     },
     settings: {
     },

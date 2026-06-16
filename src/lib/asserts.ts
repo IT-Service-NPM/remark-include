@@ -28,20 +28,21 @@ export function assertFilesExistsOrOptional(
   attributes: DirectiveAttributes,
   paths: string[]
 ): asserts paths is NonEmptyArray<string> {
-  if (paths.length === 0) {
-    const errorMessage = `file(s) "${attributes.file}" not found`;
-    const errorOptions: VFileMessageOptions = {
-      place: node.position,
-      ancestors: [node],
-      source: '@it-service-npm/remark-include',
-      ruleId: 'no-empty-file-list'
-    };
-    if (attributes.optional) {
-      file.info(errorMessage, errorOptions);
-    } else {
-      file.fail(errorMessage, errorOptions);
-    };
+  if (paths.length > 0) {
+    return;
   }
+  const errorMessage = `file(s) "${attributes.file}" not found`;
+  const errorOptions: VFileMessageOptions = {
+    place: node.position,
+    ancestors: [node],
+    source: '@it-service-npm/remark-include',
+    ruleId: 'no-empty-file-list'
+  };
+  if (attributes.optional) {
+    file.info(errorMessage, errorOptions);
+  } else {
+    file.fail(errorMessage, errorOptions);
+  };
 }
 
 /**
@@ -64,17 +65,18 @@ export function assertNoRecursiveTransclusion(
   includedFilePath: string,
   processorData?: IData
 ): void {
-  if (processorData?.processedFilePaths.includes(includedFilePath)) {
-    const filesList = [...processorData.processedFilePaths, includedFilePath]
-      .map((filePath) => `"${filePath}"`)
-      .join('\n\t-> ');
-    file.fail(`unexpected recursive transclusion:\n\t${filesList}`, {
-      place: node.position,
-      ancestors: [node],
-      source: '@it-service-npm/remark-include',
-      ruleId: 'no-recursive-transclusion'
-    });
+  if (!processorData?.processedFilePaths.includes(includedFilePath)) {
+    return;
   }
+  const filesList = [...processorData.processedFilePaths, includedFilePath]
+    .map((filePath) => `"${filePath}"`)
+    .join('\n\t-> ');
+  file.fail(`unexpected recursive transclusion:\n\t${filesList}`, {
+    place: node.position,
+    ancestors: [node],
+    source: '@it-service-npm/remark-include',
+    ruleId: 'no-recursive-transclusion'
+  });
 }
 
 /**
