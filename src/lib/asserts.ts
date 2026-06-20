@@ -80,7 +80,7 @@ export function assertNoRecursiveTransclusion(
 }
 
 /**
- * Test `file.dirname` expected
+ * Assert that `file.dirname` is defined
  *
  * @param file - current markdown file
  * @throws `VFileMessage` if `file.dirname` is undefined
