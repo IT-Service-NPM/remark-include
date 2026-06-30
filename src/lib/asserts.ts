@@ -87,11 +87,9 @@ export function assertFileDirnameIsDefined(
   file: VFile
 ): asserts file is VFile & { get dirname(): string } {
   if (typeof file.dirname === 'undefined') {
-    file.fail(
-      'Unexpected error in ::include directive: file should be an instance of VFile with specified path', {
+    file.fail('Unexpected error in ::include directive: file should be an instance of VFile with specified path', {
       source: '@it-service-npm/remark-include',
       ruleId: 'file-must-be-placed-in-file-system'
-    }
-    );
+    });
   }
 }
