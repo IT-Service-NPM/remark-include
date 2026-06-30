@@ -76,7 +76,7 @@ export function assertNoRecursiveTransclusion(
 }
 
 /**
- * Test `file.dirname` expected
+ * Assert that `file.dirname` is defined
  *
  * @param file - current markdown file
  * @throws `VFileMessage` if `file.dirname` is undefined
@@ -88,7 +88,7 @@ export function assertFileDirnameIsDefined(
 ): asserts file is VFile & { get dirname(): string } {
   if (typeof file.dirname === 'undefined') {
     file.fail(
-      '::include, unexpected error: "file" should be an instance of VFile with specified path', {
+      'Unexpected error in ::include directive: file should be an instance of VFile with specified path', {
       source: '@it-service-npm/remark-include',
       ruleId: 'file-must-be-placed-in-file-system'
     }
