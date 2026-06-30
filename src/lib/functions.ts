@@ -4,11 +4,6 @@ import type { VFile } from 'vfile';
 import { visit } from 'unist-util-visit';
 import { VFileMessage } from 'vfile-message';
 
-export interface DirectiveAttributes {
-  file: string;
-  optional: boolean;
-}
-
 export interface DirectiveInfo {
   node: LeafDirective,
   index: number,

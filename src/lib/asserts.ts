@@ -2,11 +2,7 @@ import type { LeafDirective } from 'mdast-util-directive';
 import type { VFile } from 'vfile';
 import { type Options as VFileMessageOptions } from 'vfile-message';
 import type { IData } from './types.ts';
-
-export interface DirectiveAttributes {
-  file: string;
-  optional: boolean;
-}
+import type { DirectiveAttributes } from './options.ts';
 
 type NonEmptyArray<T> = [T, ...T[]];
 
