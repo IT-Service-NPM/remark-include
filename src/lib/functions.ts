@@ -55,8 +55,6 @@ export function getIncludeDirectives(
  * @param file - Current markdown file
  * @param node - `::include` directive Node
  * @param error - errors, produced by recursive Remark processor calls
- * @param includedFilePath - file paths for including
- * @param processorData - Remark processor additional data, used by this plugin
  * @throws `VFileMessage` if unexpected recursive transclusion occurs
  *
  * @internal
@@ -64,7 +62,7 @@ export function getIncludeDirectives(
 export function wrapRecursiveProcessorCallsErrors(
   file: VFile,
   node: LeafDirective,
-  error: any
+  error: unknown
 ): never {
   if (error instanceof VFileMessage) {
     file.fail(error.message, {
@@ -75,7 +73,7 @@ export function wrapRecursiveProcessorCallsErrors(
       cause: error
     });
   } else {
-    file.fail('unknown error, produced in recursive processor call', {
+    file.fail('An unexpected error occurred during recursive include processing. Check the included file for errors.', {
       place: node.position,
       ancestors: [node],
       source: '@it-service-npm/remark-include',
