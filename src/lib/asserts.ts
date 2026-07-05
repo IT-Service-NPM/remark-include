@@ -18,7 +18,7 @@ type NonEmptyArray<T> = [T, ...T[]];
  *
  * @internal
  */
-export function assertFilesExistsOrOptional(
+export function assertFilesExistOrOptional(
   file: VFile,
   node: LeafDirective,
   attributes: DirectiveAttributes,

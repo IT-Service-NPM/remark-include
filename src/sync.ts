@@ -17,7 +17,7 @@ import {
 import { getIncludeDirectives, wrapRecursiveProcessorCallsErrors } from './lib/functions.ts';
 import { getAttributes } from './lib/options.ts';
 import {
-  assertFileDirnameIsDefined, assertFilesExistsOrOptional,
+  assertFileDirnameIsDefined, assertFilesExistOrOptional,
   assertNoRecursiveTransclusion
 } from './lib/asserts.ts';
 
@@ -70,7 +70,7 @@ export const remarkInclude: Plugin<[], Root> = function remarkInclude(
         attributes.file,
         { cwd: fileDirname }
       ).sort();
-      assertFilesExistsOrOptional(file, includeDirective.node,
+      assertFilesExistOrOptional(file, includeDirective.node,
         attributes, includedFilesPaths
       );
       const pluginData = processor.data('remarkIncludeData') ?? { processedFilePaths: [] };
