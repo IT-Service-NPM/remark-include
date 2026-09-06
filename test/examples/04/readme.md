@@ -1,6 +1,6 @@
 # Recursive transclusion
 
-`@it-service-npm/remark-include` supports recursive transclusion.
+`@it-service-npm/remark-include` supports recursive transclusion.
 
 > [!TIP]
 > This plugin has two named entry points:

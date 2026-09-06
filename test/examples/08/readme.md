@@ -2,7 +2,7 @@
 
 `@it-service-npm/remark-include` supports
 [glob](https://nodejs.org/api/fs.html#fsglobpattern-options-callback)
-as `file` attribute value.
+as `file` attribute value.
 
 Source files:
 

@@ -9,7 +9,8 @@
 	"files.associations": {
 		"LICENSE": "plaintext",
 		"NOTICE": "plaintext",
-		"*.mdp": "markdown"
+		"*.mdp": "markdown",
+		"tsdoc-metadata.json": "jsonc"
 	},
 	"[markdown]": {
 		"editor.formatOnSave": true,
